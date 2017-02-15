@@ -1,15 +1,15 @@
 # Look at http://www.lousymedia.com/csci-3308/assignments/team-project
 # Team-Project
-Names: Jianyi Chen
-Git ID: chenjianyi1995
-Jonathan Young : JonYoung1123
-Title:
-Description:
-Vision statement:
-Motivation:
-Risks:
+1. Names: Jianyi Chen
+2. Git ID: chenjianyi1995
+3. Jonathan Young : JonYoung1123
+4. Title:
+5. Description:
+6. Vision statement:
+7. Motivation:
+8. Risks:
 
-List of requirements:
+9. List of requirements:
 
 
    
