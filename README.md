@@ -3,7 +3,7 @@
 1. Names: Jianyi Chen
 2. Git ID: chenjianyi1995
 3. Jonathan Young : JonYoung1123
-   Xiaoyang Dou : xido3947
+4. Xiaoyang Dou : xido3947
 4. Title: Damn The Ram
 5. Description:
 	Shooting game where you are a buffalo, and those damned rams keeps coming.
