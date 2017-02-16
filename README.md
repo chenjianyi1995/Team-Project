@@ -2,6 +2,7 @@
 # Team-Project
 1. Names/git id: Jianyi Chen 	/ chenjianyi1995;
 		 Jonathan Young / JonYoung1123;
+		 Zijun Xu	/ zixu6769;
 		 Xiaoyang Dou 	/ xido3947;
 		 Zhiwen Shu	/ alwynShu.
 2. Title: Damn The Ram
@@ -36,5 +37,5 @@
 9. Waterfall Methodology
 10. Project Tracking Software: Trello
 link: https://trello.com/b/MCnk7DWs/damn-the-ram
-	
+Screen shot please see Trello plan	
 
