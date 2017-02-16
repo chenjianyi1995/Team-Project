@@ -1,9 +1,9 @@
 # Look at http://www.lousymedia.com/csci-3308/assignments/team-project
 # Team-Project
-1. Names/git id: Jianyi Chen 	: chenjianyi1995
-		 Jonathan Young : JonYoung1123
-		 Xiaoyang Dou 	: xido3947
-		 Zhiwen Shu	: alwynShu
+1. Names/git id: Jianyi Chen 	: chenjianyi1995;
+		 Jonathan Young : JonYoung1123;
+		 Xiaoyang Dou 	: xido3947;
+		 Zhiwen Shu	: alwynShu.
 2. Title: Damn The Ram
 3. Description:
 	Shooting game where you are a buffalo, and those damned rams keeps coming.
