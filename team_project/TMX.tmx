@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="38">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="37">
  <tileset firstgid="1" name="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F" tilewidth="16" tileheight="16" tilecount="2640" columns="55">
   <image source="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F.png" width="888" height="770"/>
  </tileset>
@@ -147,6 +147,5 @@
   <object id="34" x="2318.67" y="1152" width="33.3333" height="16"/>
   <object id="35" x="2273.33" y="1281.33" width="29.3333" height="29.3333"/>
   <object id="36" x="828" y="61.3333" width="76" height="52"/>
-  <object id="37" x="-54.6667" y="-73.3333"/>
  </objectgroup>
 </map>

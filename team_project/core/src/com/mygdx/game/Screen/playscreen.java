@@ -6,10 +6,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 
 /**
  * Created by Jianyi on 2/26/2017.
@@ -20,11 +25,25 @@ public class playscreen implements Screen {
     Texture texture;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
+    private Hud hud;
+
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthoCachedTiledMapRenderer renderer;
+
+
     public playscreen(Game game){
         this.game = (MyGdxGame) game;
         texture = new Texture("demo.png");
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.v_width,MyGdxGame.v_hieght,gamecam);
+        hud =  new Hud (game.batch);
+
+        mapLoader = new TmxMapLoader();
+        map= mapLoader.load("TMX.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
+
+        gamecam.position.set(gamePort.getScreenWidth()/3, gamePort.getScreenHeight()/3,0);
     }
 
     @Override
@@ -32,6 +51,13 @@ public class playscreen implements Screen {
 
     }
 
+    public void handleInput(){
+        
+    }
+
+    public void update(float delta){
+        handleInput();
+    }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1,0,0,1);
