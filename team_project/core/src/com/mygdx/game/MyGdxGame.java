@@ -7,6 +7,8 @@ import com.mygdx.game.Screen.playscreen;
 public class MyGdxGame extends Game {
 	public static final int v_width = 400;
 	public static final int v_hieght = 208;
+	public static final  int PPM =100;
+
 	public SpriteBatch batch;
 	
 	@Override
