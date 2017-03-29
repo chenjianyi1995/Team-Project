@@ -1,5 +1,6 @@
 package com.mygdx.game.Scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,27 +23,28 @@ public class Hud {
     private float timecount;
     private Integer score;
 
-    Label countdownlabel;
     Label scorelabel;
     Label timelabel;
     Label levellabel;
-    Label worldlabel;
-    Label bufflabel;
 
     public Hud(SpriteBatch sb){
         timecount=0;
         score = 0;
 
-        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V)_HEIGHT, new OrthographicCamera());
-        stage = new stage(viewport, sb);
+        viewport = new FitViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
+        stage = new Stage(viewport, sb);
 
-        Table table= new table();
+        Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        ScoreLabel = new Label(String.format("%06d", score), new  Label.LabelStyle(new BitmapFont(), color. WHITE))；
-        timeLabel = new Label(new Label("TIME", new  Label.LabelStyle(new BitmapFont(), color. WHITE)));
-        levelLabel = new Label("Level" new  Label.LabelStyle(new BitmapFont(), color. WHITE)));
-        table.add();
+        scorelabel = new Label(String.format("%06d", score), new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timelabel = new Label("TIME", new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levellabel = new Label("Level", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        table.add(scorelabel).expandX().padTop(8);
+        table.add(timelabel).expandX().padTop(8);
+        table.add(levellabel).expandX().padTop(8);
+
+        stage.addActor(table);
     }
 }
