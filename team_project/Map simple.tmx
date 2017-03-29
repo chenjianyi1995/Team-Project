@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="38">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="51">
  <tileset firstgid="1" name="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F" tilewidth="16" tileheight="16" tilecount="2640" columns="55">
   <image source="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F.png" width="888" height="770"/>
  </tileset>
@@ -109,7 +109,7 @@
 19449,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,16110,431,432,431,432,15880,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427
 </data>
  </layer>
- <objectgroup name="river">
+ <objectgroup name="river" visible="0">
   <object id="2" x="0" y="64" width="899" height="46"/>
   <object id="3" x="828" y="0" width="75" height="522"/>
   <object id="4" x="829" y="592" width="67" height="400"/>
@@ -123,7 +123,7 @@
   <object id="12" x="2015" y="995" width="66" height="156"/>
   <object id="13" x="2016" y="1231" width="64" height="209"/>
  </objectgroup>
- <objectgroup name="trees">
+ <objectgroup name="trees" visible="0">
   <object id="14" x="1936" y="-3" width="237" height="55"/>
   <object id="15" x="1972" y="51" width="174" height="46"/>
   <object id="16" x="1954" y="95" width="191" height="17"/>
@@ -131,22 +131,29 @@
   <object id="18" x="2015" y="142" width="99" height="52"/>
  </objectgroup>
  <objectgroup name="obstacle">
-  <object id="19" x="-2" y="0" width="829" height="62"/>
-  <object id="20" x="1326" y="96" width="113" height="47"/>
-  <object id="21" x="1342" y="79" width="81" height="81"/>
-  <object id="22" x="1362" y="162" width="44" height="14"/>
-  <object id="23" x="907" y="-3" width="1027" height="51"/>
-  <object id="24" x="2172" y="-1" width="388" height="49"/>
+  <object id="19" x="826.154" y="106.979" width="78.0798" height="416.071"/>
+  <object id="21" x="1335.33" y="80.3333" width="81" height="81"/>
+  <object id="23" x="823.808" y="592.73" width="77.6667" height="398.879"/>
+  <object id="24" x="906.829" y="-1" width="1653.17" height="49"/>
   <object id="25" x="0" y="108" width="65.3333" height="1333.33"/>
-  <object id="26" x="66.6667" y="1393.33" width="1945.33" height="48"/>
-  <object id="27" x="65.3333" y="1376" width="1950.67" height="18.6667"/>
-  <object id="29" x="2080" y="1377.33" width="478.667" height="62.6667"/>
+  <object id="26" x="66.6667" y="1374.66" width="2493.33" height="66.6667"/>
+  <object id="27" x="902.667" y="926.667" width="336.003" height="65.3334"/>
+  <object id="29" x="1238.67" y="1069.33" width="74.667" height="33.3334"/>
   <object id="31" x="2497.33" y="45.3333" width="62.6667" height="1332"/>
   <object id="32" x="2225.33" y="1149.33" width="30.6667" height="17.3333"/>
   <object id="33" x="2270.67" y="1152" width="33.3333" height="14.6667"/>
   <object id="34" x="2318.67" y="1152" width="33.3333" height="16"/>
   <object id="35" x="2273.33" y="1281.33" width="29.3333" height="29.3333"/>
-  <object id="36" x="828" y="61.3333" width="76" height="52"/>
-  <object id="37" x="-54.6667" y="-73.3333"/>
+  <object id="36" x="0.690763" y="-2.92373" width="903.309" height="108.901"/>
+  <object id="38" x="1274.67" y="1102.66" width="38.667" height="65.3334"/>
+  <object id="39" x="1177.33" y="991.997" width="61.3337" height="110.667"/>
+  <object id="40" x="1313.33" y="1134.66" width="197.334" height="33.3334"/>
+  <object id="41" x="1450.67" y="925.33" width="60.0003" height="209.333"/>
+  <object id="42" x="1510.67" y="926.663" width="574.667" height="64"/>
+  <object id="43" x="2010.67" y="990.663" width="74.667" height="164"/>
+  <object id="44" x="2009.33" y="1232" width="77.3337" height="144"/>
+  <object id="47" x="1328.33" y="80.3333" width="7.66667" height="81"/>
+  <object id="48" x="1416.67" y="80.3333" width="9.66667" height="81"/>
+  <object id="50" x="1336" y="161" width="81" height="10.3333"/>
  </objectgroup>
 </map>
