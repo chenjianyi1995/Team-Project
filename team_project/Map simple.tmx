@@ -130,7 +130,7 @@
   <object id="17" x="1971" y="114" width="159" height="28"/>
   <object id="18" x="2015" y="142" width="99" height="52"/>
  </objectgroup>
- <objectgroup name="obstacle">
+ <objectgroup name="obstacle" visible="0">
   <object id="19" x="826.154" y="106.979" width="78.0798" height="416.071"/>
   <object id="21" x="1335.33" y="80.3333" width="81" height="81"/>
   <object id="23" x="823.808" y="592.73" width="77.6667" height="398.879"/>
