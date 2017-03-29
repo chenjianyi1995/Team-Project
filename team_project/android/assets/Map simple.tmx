@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="51">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="55">
  <tileset firstgid="1" name="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F" tilewidth="16" tileheight="16" tilecount="2640" columns="55">
   <image source="Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Purity Forest 44F-60F.png" width="888" height="770"/>
  </tileset>
@@ -109,9 +109,13 @@
 19449,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,16110,431,432,431,432,15880,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427,19424,19425,19426,19427
 </data>
  </layer>
- <objectgroup name="obstacle">
+ <objectgroup name="Object Layer 2">
+  <object id="53" x="1330" y="75" width="98" height="95">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="obstacle" visible="0">
   <object id="19" x="826.154" y="106.979" width="78.0798" height="416.071"/>
-  <object id="21" x="1335.33" y="80.3333" width="81" height="81"/>
   <object id="23" x="823.808" y="592.73" width="77.6667" height="398.879"/>
   <object id="24" x="906.829" y="-1" width="1653.17" height="49"/>
   <object id="25" x="0" y="108" width="65.3333" height="1333.33"/>
@@ -131,8 +135,5 @@
   <object id="42" x="1510.67" y="926.663" width="574.667" height="64"/>
   <object id="43" x="2010.67" y="990.663" width="74.667" height="164"/>
   <object id="44" x="2009.33" y="1232" width="77.3337" height="144"/>
-  <object id="47" x="1328.33" y="80.3333" width="7.66667" height="81"/>
-  <object id="48" x="1416.67" y="80.3333" width="9.66667" height="81"/>
-  <object id="50" x="1336" y="161" width="81" height="10.3333"/>
  </objectgroup>
 </map>
