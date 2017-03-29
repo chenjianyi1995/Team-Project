@@ -130,8 +130,7 @@ public class playscreen implements Screen {
         handleInput(dt);
         world.step(1/60f, 0,2);
 
-        //gamecam.position.x = player.b2body.getPosition().x;
-        //gamecam.position.y = player.b2body.getPosition().y;
+        gamecam.position.x = player.b2body. getPosition().x;
 
         gamecam.update();
         renderer.setView(gamecam);
