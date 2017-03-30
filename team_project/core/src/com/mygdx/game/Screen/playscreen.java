@@ -50,23 +50,21 @@ public class playscreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private Bufflalo player;
-    public playscreen(Game game){
+    public playscreen(MyGdxGame game){
 
         this.game = (MyGdxGame) game;
 
         gamecam = new OrthographicCamera();
 
-        gamePort = new FitViewport(MyGdxGame.v_width / MyGdxGame.PPM, MyGdxGame.v_hieght/ MyGdxGame.PPM,gamecam );
-        hud =  new Hud(((MyGdxGame) game).batch);
+        gamePort = new FitViewport(MyGdxGame.v_width / MyGdxGame.PPM, MyGdxGame.v_hieght / MyGdxGame.PPM,gamecam);
+        hud =  new Hud(game.batch);
+
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("Map simple.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
 
-        gamecam.position.set(gamePort.getWorldWidth()/3, gamePort.getWorldHeight()/3,0);
         world = new World(new Vector2(0,0),true);
-        b2dr = new Box2DDebugRenderer();
-
         b2dr = new Box2DDebugRenderer();
 
         new B2d(world, map);
@@ -89,20 +87,22 @@ public class playscreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2)
             player.b2body.applyLinearImpulse(new Vector2(0, -0.1f), player.b2body.getWorldCenter(), true);
         //speed up
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 10)
-            player.b2body.applyLinearImpulse(new Vector2(4f, 0), player.b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -10)
-            player.b2body.applyLinearImpulse(new Vector2(-4f, 0), player.b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y <= 10)
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -10)
-            player.b2body.applyLinearImpulse(new Vector2(0, -4f), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 5)
+            player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -5)
+            player.b2body.applyLinearImpulse(new Vector2(-2f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y <= 5)
+            player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -5)
+            player.b2body.applyLinearImpulse(new Vector2(0, -2f), player.b2body.getWorldCenter(), true);
     }
 
     public void update(float dt){
         handleInput(dt);
 
         world.step(1/60f, 6, 2);
+        //player.update(dt);
+        hud.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.position.y = player.b2body.getPosition().y;
