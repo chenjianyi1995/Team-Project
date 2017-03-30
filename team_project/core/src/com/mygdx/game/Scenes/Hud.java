@@ -1,6 +1,5 @@
 package com.mygdx.game.Scenes;
 
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -8,9 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
@@ -41,7 +38,6 @@ public class Hud implements Disposable{
         worldTime = 0;
         timecount = 0;
         score = 0;
-        level = 1;
 
         viewport = new FitViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -74,6 +70,12 @@ public class Hud implements Disposable{
             currentTime.setText(String.format("%d", worldTime));
             timecount = 0;
         }
+    }
+    public void setScore(int score){
+        this.score = score;
+    }
+    public void setLevel(int level){
+        this.level = level;
     }
     @Override
     public void dispose() {
