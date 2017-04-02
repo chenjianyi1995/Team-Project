@@ -12,16 +12,16 @@ import com.mygdx.game.MyGdxGame;
  * Created by JonYoung on 3/5/17.
  */
 
-public class Enemy extends Sprite {
+public class Enemy extends Sprite{
     public World world;
     public Body b2body;
 
-    public Enemy(World world) {
+    public Enemy(World world){
         this.world = world;
         defineEnemy();
     }
 
-    public void defineEnemy() {
+    public void defineEnemy(){
         BodyDef bdef = new BodyDef();
         bdef.position.set(32 / MyGdxGame.PPM, 32 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;

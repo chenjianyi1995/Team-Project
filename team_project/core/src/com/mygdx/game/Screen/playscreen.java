@@ -1,21 +1,28 @@
 package com.mygdx.game.Screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -29,7 +36,7 @@ import com.mygdx.game.Tools.B2d;
 
 public class playscreen implements Screen {
     private MyGdxGame game;
-    private TextureAtlas atlas;
+
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private Hud hud;
@@ -41,10 +48,10 @@ public class playscreen implements Screen {
     //Box2d variables
     private World world;
     private Box2DDebugRenderer b2dr;
-    private B2d creator;
+
     private Bufflalo player;
     public playscreen(MyGdxGame game){
-        atlas = new TextureAtlas("buff.pack");
+
         this.game = (MyGdxGame) game;
 
         gamecam = new OrthographicCamera();
@@ -61,13 +68,10 @@ public class playscreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         new B2d(world, map);
-        player = new Bufflalo(world, this);
+        player = new Bufflalo(world);
 
     }
 
-    public TextureAtlas getAtlas(){
-        return atlas;
-    }
     @Override
     public void show() {
 
@@ -99,6 +103,7 @@ public class playscreen implements Screen {
         world.step(1/60f, 6, 2);
         //player.update(dt);
         hud.update(dt);
+
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.position.y = player.b2body.getPosition().y;
         gamecam.update();
@@ -112,12 +117,6 @@ public class playscreen implements Screen {
         //render our game map
         renderer.render();
         b2dr.render(world, gamecam.combined);
-
-        game.batch.setProjectionMatrix(gamecam.combined);
-        game.batch.begin();
-        player.draw(game.batch);
-        game.batch.end();
-
         game.batch.setProjectionMatrix(gamecam.combined);
         hud.stage.draw();
     }

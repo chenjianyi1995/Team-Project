@@ -1,2 +1,1 @@
-include ':assets'
 include 'desktop', 'android', 'ios', 'html', 'core'

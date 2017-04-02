@@ -1,5 +1,6 @@
 package com.mygdx.game.Scenes;
 
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -7,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
@@ -20,24 +23,25 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private Integer worldTime;
-    private float timecount;
-    private static Integer score;
-    private Integer level;
+    private int worldTime;
+    private int timecount;
+    private int score;
+    private int level;
 
 
 
-    private static Label scorelabel;
-    private Label timelabel;
-    private Label levellabel;
-    private Label currentTime;
-    private Label totalScore;
-    private Label currentLevel;
+    Label scorelabel;
+    Label timelabel;
+    Label levellabel;
+    Label currentTime;
+    Label totalScore;
+    Label currentLevel;
 
     public Hud(SpriteBatch sb){
         worldTime = 0;
         timecount = 0;
         score = 0;
+        level = 1;
 
         viewport = new FitViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -70,10 +74,6 @@ public class Hud implements Disposable{
             currentTime.setText(String.format("%d", worldTime));
             timecount = 0;
         }
-    }
-    public static void addscore(int value){
-        score += value;
-        scorelabel.setText(String.format("%d", score));
     }
     @Override
     public void dispose() {
