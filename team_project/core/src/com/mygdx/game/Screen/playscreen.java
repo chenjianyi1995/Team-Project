@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -36,7 +37,7 @@ import com.mygdx.game.Tools.B2d;
 
 public class playscreen implements Screen {
     private MyGdxGame game;
-
+    private TextureAtlas atlas;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private Hud hud;
@@ -48,10 +49,10 @@ public class playscreen implements Screen {
     //Box2d variables
     private World world;
     private Box2DDebugRenderer b2dr;
-
+    private B2d creator;
     private Bufflalo player;
     public playscreen(MyGdxGame game){
-
+        atlas = new TextureAtlas("buff.pack");
         this.game = (MyGdxGame) game;
 
         gamecam = new OrthographicCamera();
@@ -68,10 +69,13 @@ public class playscreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         new B2d(world, map);
-        player = new Bufflalo(world);
+        player = new Bufflalo(world, this);
 
     }
 
+    public TextureAtlas getAtlas(){
+        return atlas;
+    }
     @Override
     public void show() {
 
@@ -117,6 +121,12 @@ public class playscreen implements Screen {
         //render our game map
         renderer.render();
         b2dr.render(world, gamecam.combined);
+
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
+
         game.batch.setProjectionMatrix(gamecam.combined);
         hud.stage.draw();
     }

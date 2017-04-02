@@ -23,19 +23,19 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private int worldTime;
-    private int timecount;
-    private int score;
-    private int level;
+    private Integer worldTime;
+    private float timecount;
+    private static Integer score;
+    private Integer level;
 
 
 
-    Label scorelabel;
-    Label timelabel;
-    Label levellabel;
-    Label currentTime;
-    Label totalScore;
-    Label currentLevel;
+    private static Label scorelabel;
+    private Label timelabel;
+    private Label levellabel;
+    private Label currentTime;
+    private Label totalScore;
+    private Label currentLevel;
 
     public Hud(SpriteBatch sb){
         worldTime = 0;
@@ -75,6 +75,12 @@ public class Hud implements Disposable{
             timecount = 0;
         }
     }
+
+    public static void addscore(int value){
+        score += value;
+        scorelabel.setText(String.format("%d", score));
+    }
+
     @Override
     public void dispose() {
         stage.dispose();
