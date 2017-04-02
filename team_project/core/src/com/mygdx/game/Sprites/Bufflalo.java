@@ -17,9 +17,11 @@ import com.mygdx.game.Screen.playscreen;
 public class Bufflalo extends Sprite{
     public World world;
     public Body b2body;
+
     public TextureRegion buffstand;
     public Bufflalo(World world, playscreen screen){
         super(screen.getAtlas().findRegion("buff"));
+
         this.world = world;
         defineBuffalo();
         buffstand = new TextureRegion(getTexture(),0,0,16,16);
@@ -28,10 +30,11 @@ public class Bufflalo extends Sprite{
     }
 
     public void update(float dt){
-        setPosition();
+        setPosition(0,0);
     }
 
     public void defineBuffalo(){
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(200 / MyGdxGame.PPM,200 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
