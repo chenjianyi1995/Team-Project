@@ -61,7 +61,7 @@ public class Bufflalo extends Sprite{
         fdef.filter.maskBits = MyGdxGame.default_bit | MyGdxGame.enemy_bit;
 
         health = 100;
-        level = 5;
+        level = 1;
         experience = 0;
         xpToNext = 100;
         damage = 5;
