@@ -95,7 +95,7 @@ public class playscreen implements Screen {
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             //player.setX(player.getX()+100);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
