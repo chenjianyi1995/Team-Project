@@ -36,7 +36,7 @@ public class Enemy extends Sprite{
 
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(200 / MyGdxGame.PPM, 200 / MyGdxGame.PPM);
+        bdef.position.set(1380 / MyGdxGame.PPM, 1320 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
