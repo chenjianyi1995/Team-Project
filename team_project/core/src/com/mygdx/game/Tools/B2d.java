@@ -10,13 +10,17 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Screen.playscreen;
 
 /**
  * Created by Jianyi on 3/29/2017.
  */
 
 public class B2d {
-    public B2d(World world, TiledMap map){
+    public B2d(playscreen screen){
+        World world = screen.getWorld();
+        TiledMap map = screen.getMap();
+
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();

@@ -28,7 +28,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Bufflalo;
+import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
+import com.mygdx.game.Tools.WorldCL;
+
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 
 /**
@@ -53,6 +57,8 @@ public class playscreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private Bufflalo player;
+    private Enemy enemy;
+
     public playscreen(MyGdxGame game){
         atlas = new TextureAtlas("buff.pack");
         this.game = (MyGdxGame) game;
@@ -70,9 +76,11 @@ public class playscreen implements Screen {
         world = new World(new Vector2(0,0),true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2d(world, map);
-        player = new Bufflalo(world);//,this);
+        new B2d(this);
+        player = new Bufflalo(this);
+        world.setContactListener(new WorldCL());
 
+        enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
     }
 
     public  TextureAtlas getAtlas(){
@@ -84,8 +92,9 @@ public class playscreen implements Screen {
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+            //player.setX(player.getX()+100);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
             player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
         if(Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= 2)
@@ -107,7 +116,8 @@ public class playscreen implements Screen {
         handleInput(dt);
 
         world.step(1/60f, 6, 2);
-        //player.update(dt);
+        player.update(dt);
+        enemy.update(dt);
         hud.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
@@ -120,13 +130,15 @@ public class playscreen implements Screen {
         update(delta);
         Gdx.gl.glClearColor(1,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         //render our game map
         renderer.render();
         b2dr.render(world, gamecam.combined);
         game.batch.setProjectionMatrix(gamecam.combined);
-        /*game.batch.begin();
+        game.batch.begin();
         player.draw(game.batch);
-        game.batch.end();*/
+        //enemy.draw(game.batch);
+        game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -136,6 +148,14 @@ public class playscreen implements Screen {
     public void resize(int width, int height) {
         gamePort.update(width,height);
 
+    }
+
+    public TiledMap getMap(){
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
     }
 
     @Override

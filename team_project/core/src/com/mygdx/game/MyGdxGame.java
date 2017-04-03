@@ -5,10 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screen.playscreen;
 
 public class MyGdxGame extends Game {
-	public static final int v_width = 400;
-	public static final int v_hieght = 300;
+	public static final int v_width = 480;
+	public static final int v_hieght = 800;
 	public static final float PPM = 100;
 
+	public static final short default_bit = 1;
+	public static final short buff_bit = 2;
+	public static final short enemy_bit = 4;
 
 	public SpriteBatch batch;
 	
