@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Bufflalo;
+import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 
 
@@ -53,6 +54,7 @@ public class playscreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private Bufflalo player;
+    private Enemy enemy;
     public playscreen(MyGdxGame game){
         atlas = new TextureAtlas("buff.pack");
         this.game = (MyGdxGame) game;
@@ -71,7 +73,8 @@ public class playscreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         new B2d(world, map);
-        player = new Bufflalo(world);//,this);
+        player = new Bufflalo(world);
+        enemy = new Enemy(world);
 
     }
 

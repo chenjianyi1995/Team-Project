@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/team_project/android/android.iml" filepath="$PROJECT_DIR$/team_project/android/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/assets/src/androidTest/androidTest.iml" filepath="$PROJECT_DIR$/team_project/assets/src/androidTest/androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/core/core.iml" filepath="$PROJECT_DIR$/team_project/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/desktop/desktop.iml" filepath="$PROJECT_DIR$/team_project/desktop/desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/html/html.iml" filepath="$PROJECT_DIR$/team_project/html/html.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/ios/ios.iml" filepath="$PROJECT_DIR$/team_project/ios/ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/assets/src/main/main.iml" filepath="$PROJECT_DIR$/team_project/assets/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/team_project/assets/src/test/test.iml" filepath="$PROJECT_DIR$/team_project/assets/src/test/test.iml" />
+    </modules>
+  </component>
+</project>
