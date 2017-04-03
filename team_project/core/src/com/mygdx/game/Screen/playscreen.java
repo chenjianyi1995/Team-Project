@@ -76,9 +76,12 @@ public class playscreen implements Screen {
         world = new World(new Vector2(0,0),true);
         b2dr = new Box2DDebugRenderer();
 
+
         new B2d(this);
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
+        //enemy = new Enemy(this);
+
 
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
     }

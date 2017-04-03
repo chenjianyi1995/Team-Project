@@ -25,15 +25,24 @@ public class Enemy extends Sprite{
         //setBounds(getX(),getY(),16/MyGdxGame.PPM,16/MyGdxGame.PPM);
     }
 
+    public Enemy(Body b2body) {
+        this.b2body = b2body;
+    }
+
+    public Enemy(Sprite sprite, Body b2body) {
+        super(sprite);
+        this.b2body = b2body;
+    }
+
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / MyGdxGame.PPM, 32 / MyGdxGame.PPM);
+        bdef.position.set(200 / MyGdxGame.PPM, 200 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / MyGdxGame.PPM);
+        shape.setRadius(10 / MyGdxGame.PPM);
 
         fdef.filter.categoryBits = MyGdxGame.enemy_bit;
         fdef.filter.maskBits = MyGdxGame.enemy_bit | MyGdxGame.default_bit | MyGdxGame.buff_bit;
