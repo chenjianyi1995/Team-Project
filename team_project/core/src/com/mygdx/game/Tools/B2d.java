@@ -27,7 +27,7 @@ public class B2d {
         Body body;
 
         //layer for obstacle
-        for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
+        /*for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -38,7 +38,7 @@ public class B2d {
             shape.setAsBox(rect.getWidth() / 2 / MyGdxGame.PPM, rect.getHeight() / 2 / MyGdxGame.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
-        }
+        }*/
         //For spawner
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
