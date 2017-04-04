@@ -94,6 +94,16 @@ public class playscreen implements Screen {
 
     }
 
+    public void shooting() {
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.A))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.S))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.D))
+            ;
+    }
     public void handleInput(float dt){
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
@@ -113,6 +123,7 @@ public class playscreen implements Screen {
             player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -5)
             player.b2body.applyLinearImpulse(new Vector2(0, -2f), player.b2body.getWorldCenter(), true);
+        shooting();
     }
 
     public void update(float dt){

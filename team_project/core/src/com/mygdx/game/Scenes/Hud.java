@@ -24,7 +24,7 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private Integer worldTime;
+    private static Integer worldTime;
     private float timecount;
     private static Integer score;
     private int level;
@@ -81,6 +81,9 @@ public class Hud implements Disposable{
     public static void addscrore(int value){
         score += value;
         scorelabel.setText(String.format("%d", score));
+    }
+    public static Integer getTotTime() {
+        return worldTime;
     }
     @Override
     public void dispose() {
