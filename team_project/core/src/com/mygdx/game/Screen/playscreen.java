@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Bufflalo;
+import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
@@ -58,6 +59,7 @@ public class playscreen implements Screen {
 
     private Bufflalo player;
     private Enemy enemy;
+    private Bullet bullet;
 
     public playscreen(MyGdxGame game){
         atlas = new TextureAtlas("buff.pack");
@@ -81,9 +83,8 @@ public class playscreen implements Screen {
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
-
-
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
+        bullet = new Bullet(world);
     }
 
     public  TextureAtlas getAtlas(){
