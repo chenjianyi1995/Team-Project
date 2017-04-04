@@ -30,7 +30,7 @@ public class Bufflalo extends Sprite{
     private static int xpToNext;
     private static int damage;
     private static int attSpd;
-    private static int movSpd;
+    private static float movSpd;
 
 
     public Bufflalo(playscreen screen){
@@ -66,7 +66,7 @@ public class Bufflalo extends Sprite{
         xpToNext = 100;
         damage = 5;
         attSpd = 1;
-        movSpd = 1;
+        movSpd = 10;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -115,10 +115,22 @@ public class Bufflalo extends Sprite{
     public void setAttSpd() {
         attSpd ++;
     }
-    public static int getMovSpd() {
+    public static float getMovSpd() {
         return movSpd;
     }
     public void setMovSpd() {
         movSpd ++;
+    }
+    public void moveRight() {
+        b2body.setTransform(b2body.getPosition().x + (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getPosition().y, b2body.getAngle());
+    }
+    public void moveLeft() {
+        b2body.setTransform(b2body.getPosition().x - (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getPosition().y, b2body.getAngle());
+    }
+    public void moveUp() {
+        b2body.setTransform(b2body.getPosition().x, b2body.getPosition().y + (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getAngle());
+    }
+    public void moveDown() {
+        b2body.setTransform(b2body.getPosition().x, b2body.getPosition().y - (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getAngle());
     }
 }
