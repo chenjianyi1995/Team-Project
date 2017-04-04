@@ -24,6 +24,15 @@ public class Bufflalo extends Sprite{
     public Body b2body;
     private TextureRegion buffstand;
 
+    private static int health;
+    private static int level;
+    private static int experience;
+    private static int xpToNext;
+    private static int damage;
+    private static int attSpd;
+    private static int movSpd;
+
+
     public Bufflalo(playscreen screen){
         super(screen.getAtlas().findRegion("buff"));
         this.world = screen.getWorld();
@@ -51,6 +60,14 @@ public class Bufflalo extends Sprite{
         fdef.filter.categoryBits = MyGdxGame.buff_bit;
         fdef.filter.maskBits = MyGdxGame.default_bit | MyGdxGame.enemy_bit;
 
+        health = 50;
+        level = 1;
+        experience = 0;
+        xpToNext = 100;
+        damage = 5;
+        attSpd = 1;
+        movSpd = 1;
+
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
@@ -60,5 +77,48 @@ public class Bufflalo extends Sprite{
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("head");
+    }
+    public static int getHealth() {
+        return health;
+    }
+    public void setHealth(int newHealth, boolean isDamage) {
+        if(isDamage) {
+            health = health - newHealth;
+        }
+        else health = health + newHealth;
+    }
+    public static int getLevel() {
+        return level;
+    }
+    public void setLevel() {
+        if(experience >= xpToNext){
+            level ++;
+            xpToNext = xpToNext + 100;
+        }
+    }
+    public static int getExperience() {
+        return experience;
+    }
+    //may want to set xpGain to be variable to diff (from time calculation for enemy level
+    public void setExperience(int xpGain) {
+        experience = experience + xpGain;
+    }
+    public static int getDamage(){
+        return damage;
+    }
+    public void setDamage(){
+        damage = damage + damage;
+    }
+    public static int getAttSpd() {
+        return attSpd;
+    }
+    public void setAttSpd() {
+        attSpd ++;
+    }
+    public static int getMovSpd() {
+        return movSpd;
+    }
+    public void setMovSpd() {
+        movSpd ++;
     }
 }
