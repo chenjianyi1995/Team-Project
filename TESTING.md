@@ -6,21 +6,22 @@ Vision: Keeping school spirit alive, one game at a time.
 
 Automated Tests:
 
+
 User Acceptance Tests:
 1)
 Use case name
-	Verify user can controll direction using arrow keys
+	Verify user can control direction using arrow keys
 Description
-	Test movement controll
+	Test movement control
 Pre-conditions
 	User has a functional keyboard
 Test steps
 	1.Run the game
-	2.Click on different arrow keys
+	2.Press on different arrow keys
 Expected result
-	User should be able to move to all four directions by using arrow keys
+	User should be able to move in all four directions by using arrow keys
 Actual result
-	Bufflalo can move to all four directions correctly
+	Bufflalo can move in all four directions correctly
 Status (Pass/Fail)
 	Pass
 Notes
@@ -35,11 +36,13 @@ Description
 	Test map boundary	
 Pre-conditions
 	User has a founctional keyboard
+	Verified that movement functions work accurately
 Test steps
 	1.Run the game
 	2.Go to map boundary by using arrow keys
+	3.See whether or not player can pass through the boundary
 Expected result
-	User shouldn't be able to move out of the map
+	User shouldn't be able to move out of the map/pass through boundaries
 Actual result
 	User can not go over map boundary
 Status (Pass/Fail)
@@ -56,6 +59,7 @@ Description
 	To make sure the ram spawns at the spawner
 Pre-conditions
 	User has a founctional keyboard
+	Verified that movement functions work accurately
 Test steps
 	1.Run the game
 	2.Go to the spawner by using arrow key

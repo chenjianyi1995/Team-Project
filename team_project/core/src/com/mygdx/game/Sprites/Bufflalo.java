@@ -66,7 +66,7 @@ public class Bufflalo extends Sprite{
         xpToNext = 100;
         damage = 5;
         attSpd = 1;
-        movSpd = 10;
+        movSpd = 1;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
