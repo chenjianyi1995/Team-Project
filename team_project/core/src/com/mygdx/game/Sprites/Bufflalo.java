@@ -121,16 +121,4 @@ public class Bufflalo extends Sprite{
     public void setMovSpd() {
         movSpd ++;
     }
-    public void moveRight() {
-        b2body.setTransform(b2body.getPosition().x + (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getPosition().y, b2body.getAngle());
-    }
-    public void moveLeft() {
-        b2body.setTransform(b2body.getPosition().x - (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getPosition().y, b2body.getAngle());
-    }
-    public void moveUp() {
-        b2body.setTransform(b2body.getPosition().x, b2body.getPosition().y + (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getAngle());
-    }
-    public void moveDown() {
-        b2body.setTransform(b2body.getPosition().x, b2body.getPosition().y - (getMovSpd() * (2 / MyGdxGame.PPM)), b2body.getAngle());
-    }
 }
