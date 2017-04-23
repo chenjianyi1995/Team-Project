@@ -92,7 +92,7 @@ public class playscreen implements Screen {
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
-        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world)));
+        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n')));
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
@@ -111,17 +111,17 @@ public class playscreen implements Screen {
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            playscreen.bulletList.add(new Bullet(world));
-            
+            playscreen.bulletList.add(new Bullet(world, player, 'w'));
+
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            playscreen.bulletList.add(new Bullet(world));
+            playscreen.bulletList.add(new Bullet(world, player, 'a'));
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            playscreen.bulletList.add(new Bullet(world));
+            playscreen.bulletList.add(new Bullet(world, player, 's'));
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            playscreen.bulletList.add(new Bullet(world));
+            playscreen.bulletList.add(new Bullet(world, player, 'd'));
         }
     }
     public void handleInput(float dt) {

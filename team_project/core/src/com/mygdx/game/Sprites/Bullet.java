@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
+import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
  * Created by zijunxu on 4/3/17.
@@ -19,15 +20,13 @@ public class Bullet extends Sprite {
     public World world;
     public Body b2body;
 
-    private boolean vert;
-    private boolean horz;
+    private char direction;
     private Bufflalo player;
 
-    public Bullet(World world, Bufflalo player, boolean vert, boolean horz){
+    public Bullet(World world, Bufflalo player, char direction){
         this.world = world;
         this.player = player;
-        this.vert = vert;
-        this.horz = horz;
+        this.direction = direction;
         defineBullet();
     }
 
@@ -44,6 +43,8 @@ public class Bullet extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+
     }
 
 }
