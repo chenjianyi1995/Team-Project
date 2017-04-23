@@ -7,7 +7,9 @@ Title: Damn The Ram
 Vision: Keeping school spirit alive, one game at a time.
 
 Automated Tests:
-
+We created a junit4 test cases for handling input, however, this isn't good for auto testing.
+We don't have any functions that actually return value which is good for auto testing. Therefore, we
+can't really do auto testing. Hopefully we can talk to the professor! 
 
 User Acceptance Tests:
 1)
