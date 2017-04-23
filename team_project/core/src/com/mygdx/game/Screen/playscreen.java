@@ -119,7 +119,7 @@ public class playscreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
             player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
         }
-        
+
 
 
         //speed up
