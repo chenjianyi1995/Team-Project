@@ -10,14 +10,11 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
-<<<<<<< HEAD
 import com.mygdx.game.Sprites.Bufflalo;
 import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
-=======
 import com.sun.org.apache.xpath.internal.operations.String;
 
->>>>>>> 77602c4be1e62599ec1511db6efb20def1614680
 /**
  * Created by zijunxu on 4/3/17.
  */
