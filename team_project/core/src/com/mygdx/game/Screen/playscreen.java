@@ -103,6 +103,8 @@ public class playscreen implements Screen {
     }
 
     public void shooting() {
+        //player.b2body.getPosition().x;
+        //player.b2body.getPosition().y;
         if(Gdx.input.isKeyPressed(Input.Keys.W))
             ;
         if(Gdx.input.isKeyPressed(Input.Keys.A))
