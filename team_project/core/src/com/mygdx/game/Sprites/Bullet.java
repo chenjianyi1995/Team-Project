@@ -10,9 +10,14 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
+<<<<<<< HEAD
 import com.mygdx.game.Sprites.Bufflalo;
 import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
+=======
+import com.sun.org.apache.xpath.internal.operations.String;
+
+>>>>>>> 77602c4be1e62599ec1511db6efb20def1614680
 /**
  * Created by zijunxu on 4/3/17.
  */
@@ -22,14 +27,19 @@ public class Bullet extends Sprite {
     public World world;
     public Body b2body;
 
-    public Bullet(World world){
+    private char direction;
+    private Bufflalo player;
+
+    public Bullet(World world, Bufflalo player, char direction){
         this.world = world;
+        this.player = player;
+        this.direction = direction;
         defineBullet();
     }
 
     private void defineBullet() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(200 / MyGdxGame.PPM,200 / MyGdxGame.PPM);
+        bdef.position.set(player.b2body.getPosition().x / MyGdxGame.PPM,player.b2body.getPosition().y / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -40,6 +50,8 @@ public class Bullet extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+
     }
 
 }

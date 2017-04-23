@@ -24,6 +24,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -34,6 +36,9 @@ import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
@@ -61,7 +66,7 @@ public class playscreen implements Screen {
 
     private Bufflalo player;
     private Enemy enemy;
-    private Bullet bullet;
+    private static java.util.List<Bullet> bulletList;
 
     private Music music;
 
@@ -87,8 +92,8 @@ public class playscreen implements Screen {
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
+        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n')));
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
-        bullet = new Bullet(world);
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -105,14 +110,19 @@ public class playscreen implements Screen {
     public void shooting() {
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
-            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+            playscreen.bulletList.add(new Bullet(world, player, 'w'));
+
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+            playscreen.bulletList.add(new Bullet(world, player, 'a'));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+            playscreen.bulletList.add(new Bullet(world, player, 's'));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+            playscreen.bulletList.add(new Bullet(world, player, 'd'));
+        }
     }
     public void handleInput(float dt) {
 
