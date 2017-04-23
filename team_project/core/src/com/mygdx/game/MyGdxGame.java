@@ -1,6 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screen.playscreen;
 
@@ -14,10 +17,15 @@ public class MyGdxGame extends Game {
 	public static final short enemy_bit = 4;
 
 	public SpriteBatch batch;
+
+	public static AssetManager manager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		manager = new AssetManager();
+		manager.load("audio/background.ogg", Music.class);
+		manager.finishLoading();
 		setScreen(new playscreen(this));
 	}
 
