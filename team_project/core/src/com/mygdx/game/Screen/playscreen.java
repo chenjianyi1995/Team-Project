@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -61,6 +63,8 @@ public class playscreen implements Screen {
     private Enemy enemy;
     private Bullet bullet;
 
+    private Music music;
+
     public playscreen(MyGdxGame game){
         atlas = new TextureAtlas("buff.pack");
         this.game = (MyGdxGame) game;
@@ -85,6 +89,9 @@ public class playscreen implements Screen {
         //enemy = new Enemy(this);
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
         bullet = new Bullet(world);
+        music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
     }
 
     public  TextureAtlas getAtlas(){

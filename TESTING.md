@@ -1,3 +1,5 @@
+Please read the raw file to get better vision
+
 Who: Zijun Xu, Jianyi Chen, Jonathan Young, Zhiwen Shu, Xiaoyang Dou
 
 Title: Damn The Ram
