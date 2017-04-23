@@ -1,6 +1,7 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -81,6 +82,7 @@ public class Hud implements Disposable{
     public static void addscrore(int value){
         score += value;
         scorelabel.setText(String.format("%d", score));
+        MyGdxGame.manager.get("audio/score.wav", Sound.class).play();
     }
     public static Integer getTotTime() {
         return worldTime;

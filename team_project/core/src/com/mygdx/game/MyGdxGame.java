@@ -25,6 +25,7 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
 		manager.load("audio/background.ogg", Music.class);
+		manager.load("audio/score.wav", Sound.class);
 		manager.finishLoading();
 		setScreen(new playscreen(this));
 	}
