@@ -31,6 +31,9 @@ public class Bufflalo extends Sprite{
     private static int damage;
     private static int attSpd;
     private static float movSpd;
+    private boolean bufflaloIsDead;
+    private float stateTimer;
+    public Object currentState;
 
 
     public Bufflalo(playscreen screen){
@@ -120,5 +123,12 @@ public class Bufflalo extends Sprite{
     }
     public void setMovSpd() {
         movSpd ++;
+    }
+    public boolean isDead(){
+        return bufflaloIsDead;
+    }
+
+    public float getStateTimer(){
+        return stateTimer;
     }
 }
