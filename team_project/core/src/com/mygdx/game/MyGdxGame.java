@@ -26,6 +26,8 @@ public class MyGdxGame extends Game {
 		manager = new AssetManager();
 		manager.load("audio/background.ogg", Music.class);
 		manager.load("audio/score.wav", Sound.class);
+		manager.load("audio/gunshot.wav", Sound.class);
+		manager.load("audio/gameover.wav", Sound.class);
 		manager.finishLoading();
 		setScreen(new playscreen(this));
 	}

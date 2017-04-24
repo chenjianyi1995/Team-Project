@@ -26,6 +26,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -39,6 +40,7 @@ import com.mygdx.game.Tools.WorldCL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
@@ -110,18 +112,39 @@ public class playscreen implements Screen {
     public void shooting() {
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'w'));
+        float bulletSpeed = 5f;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            Bullet bullet = new Bullet(world, player, 'w');
+            playscreen.bulletList.add(bullet);
 
+            bullet.b2body.applyLinearImpulse(new Vector2(0, bulletSpeed), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/gunshot.wav", Sound.class).play();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'a'));
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            Bullet bullet = new Bullet(world, player, 'a');
+            playscreen.bulletList.add(bullet);
+            bullet.b2body.applyLinearImpulse(new Vector2(-bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/gunshot.wav", Sound.class).play();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            playscreen.bulletList.add(new Bullet(world, player, 's'));
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            Bullet bullet = new Bullet(world, player, 's');
+            playscreen.bulletList.add(bullet);
+            bullet.b2body.applyLinearImpulse(new Vector2(0, -bulletSpeed), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/gunshot.wav", Sound.class).play();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'd'));
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            Bullet bullet = new Bullet(world, player, 'd');
+            playscreen.bulletList.add(bullet);
+            bullet.b2body.applyLinearImpulse(new Vector2(bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/gunshot.wav", Sound.class).play();
+        }
+    }
+
+    public void removeBullet() {
+        int i;
+        for(i = 0; i < bulletList.size(); i ++) {
+            Bullet bullet = bulletList.get(i);
+         //   bulletList.remove(bulletList.size() - i);
         }
     }
     public void handleInput(float dt) {
@@ -163,6 +186,8 @@ public class playscreen implements Screen {
     public void update(float dt){
         handleInput(dt);
         shooting();
+
+        removeBullet();
 
         world.step(1/60f, 6, 2);
         player.update(dt);

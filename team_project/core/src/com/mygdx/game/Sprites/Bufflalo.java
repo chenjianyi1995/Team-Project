@@ -21,7 +21,7 @@ import com.mygdx.game.TextureManager;
 
 public class Bufflalo extends Sprite{
     public World world;
-    public Body b2body;
+    public static Body b2body;
     private TextureRegion buffstand;
 
     private static int health;

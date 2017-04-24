@@ -3,6 +3,8 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -23,6 +25,7 @@ import com.sun.org.apache.xpath.internal.operations.String;
 public class Bullet extends Sprite {
     public World world;
     public Body b2body;
+   // private TextureRegion bulletstand;
 
     private char direction;
     private Bufflalo player;
@@ -36,7 +39,10 @@ public class Bullet extends Sprite {
 
     private void defineBullet() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(player.b2body.getPosition().x / MyGdxGame.PPM,player.b2body.getPosition().y / MyGdxGame.PPM);
+        if(direction == 'w') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight() + this.getHeight());
+        else if(direction == 'a') bdef.position.set(player.getX() + this.getWidth(), player.getY() + player.getHeight()/2);
+        else if(direction == 's') bdef.position.set(player.getX() + player.getHeight()/2, player.getY() + this.getHeight());
+        else if(direction == 'd') bdef.position.set(player.getX() + player.getWidth() + this.getWidth(), player.getY() + player.getHeight()/2);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -47,7 +53,6 @@ public class Bullet extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
-
 
     }
 
