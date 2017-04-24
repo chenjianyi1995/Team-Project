@@ -24,9 +24,12 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+<<<<<<< HEAD
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+=======
+>>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -37,10 +40,14 @@ import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
+<<<<<<< HEAD
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+=======
+import com.sun.org.glassfish.gmbal.GmbalException;
+>>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
@@ -68,7 +75,7 @@ public class playscreen implements Screen {
 
     private Bufflalo player;
     private Enemy enemy;
-    private static java.util.List<Bullet> bulletList;
+    private Bullet bullet;
 
     private Music music;
 
@@ -94,8 +101,8 @@ public class playscreen implements Screen {
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
-        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n')));
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
+        bullet = new Bullet(world);
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -110,6 +117,7 @@ public class playscreen implements Screen {
     }
 
     public void shooting() {
+<<<<<<< HEAD
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
         float bulletSpeed = 5f;
@@ -146,6 +154,16 @@ public class playscreen implements Screen {
             Bullet bullet = bulletList.get(i);
          //   bulletList.remove(bulletList.size() - i);
         }
+=======
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.A))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.S))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.D))
+            ;
+>>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
     }
     public void handleInput(float dt) {
 
@@ -161,7 +179,7 @@ public class playscreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
             player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
         }
-
+        
 
 
         //speed up
@@ -216,6 +234,18 @@ public class playscreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+        if(gameOver()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
+
+    public boolean gameOver(){
+        if(player.currentState == Bufflalo.State.DEAD && player.getStateTimer() > 3){
+            return true;
+        }
+        return false;
     }
 
     @Override

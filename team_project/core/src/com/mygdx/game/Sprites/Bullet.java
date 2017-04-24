@@ -3,7 +3,10 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+<<<<<<< HEAD
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+=======
+>>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -53,7 +56,10 @@ public class Bullet extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
     }
 
 }
