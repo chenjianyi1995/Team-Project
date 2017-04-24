@@ -201,21 +201,13 @@ public class playscreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-<<<<<<< HEAD
-        /*if(gameOver()){
-=======
       /*  if(gameOver()){
->>>>>>> a94bfec074561dee1d465e91a661a52feb846e91
             game.setScreen(new GameOverScreen(game));
             dispose();
         }*/
     }
 
-<<<<<<< HEAD
-    /*public boolean gameOver(){
-=======
    /* public boolean gameOver(){
->>>>>>> a94bfec074561dee1d465e91a661a52feb846e91
         if(player.currentState == Bufflalo.State.DEAD && player.getStateTimer() > 3){
             return true;
         }
