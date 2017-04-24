@@ -111,17 +111,20 @@ public class playscreen implements Screen {
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'w'));
-
+            Bullet bullet = new Bullet(world, player, 'w');
+            playscreen.bulletList.add(bullet);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'a'));
+            Bullet bullet = new Bullet(world, player, 'a');
+            playscreen.bulletList.add(bullet);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            playscreen.bulletList.add(new Bullet(world, player, 's'));
+            Bullet bullet = new Bullet(world, player, 's');
+            playscreen.bulletList.add(bullet);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            playscreen.bulletList.add(new Bullet(world, player, 'd'));
+            Bullet bullet = new Bullet(world, player, 'd');
+            playscreen.bulletList.add(bullet);
         }
     }
     public void handleInput(float dt) {
@@ -187,6 +190,14 @@ public class playscreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         enemy.draw(game.batch);
+       /* if(!bulletList.isEmpty()) {
+            for(int i = 0; i < bulletList.size(); i++) {
+                Bullet bullet =bulletList.get(i);
+                bullet.draw(game.batch);
+                bulletList.remove(i);
+            }
+        }
+        */
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
