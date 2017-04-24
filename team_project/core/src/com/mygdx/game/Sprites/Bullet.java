@@ -11,11 +11,15 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sprites.Bufflalo;
+import com.mygdx.game.Screen.playscreen;
+import com.mygdx.game.Scenes.Hud;
 import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
  * Created by zijunxu on 4/3/17.
  */
+
 
 public class Bullet extends Sprite {
     public World world;
