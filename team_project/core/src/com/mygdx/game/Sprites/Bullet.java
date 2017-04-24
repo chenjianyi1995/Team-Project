@@ -16,6 +16,8 @@ import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
 import com.sun.org.apache.xpath.internal.operations.String;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Created by zijunxu on 4/3/17.
  */
@@ -28,6 +30,7 @@ public class Bullet extends Sprite {
 
     private char direction;
     private Bufflalo player;
+    private Texture texture;
 
     public Bullet(World world, Bufflalo player, char direction){
         this.world = world;
@@ -48,7 +51,6 @@ public class Bullet extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(10/ MyGdxGame.PPM);
-
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
