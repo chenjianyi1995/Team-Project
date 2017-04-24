@@ -1,6 +1,6 @@
 package com.mygdx.game.Screen;
 
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -8,30 +8,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-<<<<<<< HEAD
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
-=======
->>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -40,16 +24,10 @@ import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
-<<<<<<< HEAD
+import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-=======
-import com.sun.org.glassfish.gmbal.GmbalException;
->>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 
 /**
@@ -75,7 +53,7 @@ public class playscreen implements Screen {
 
     private Bufflalo player;
     private Enemy enemy;
-    private Bullet bullet;
+    private static java.util.List<Bullet> bulletList;
 
     private Music music;
 
@@ -102,7 +80,7 @@ public class playscreen implements Screen {
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
-        bullet = new Bullet(world);
+        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n')));
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -117,14 +95,12 @@ public class playscreen implements Screen {
     }
 
     public void shooting() {
-<<<<<<< HEAD
         //player.b2body.getPosition().x;
         //player.b2body.getPosition().y;
         float bulletSpeed = 5f;
         if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             Bullet bullet = new Bullet(world, player, 'w');
             playscreen.bulletList.add(bullet);
-
             bullet.b2body.applyLinearImpulse(new Vector2(0, bulletSpeed), bullet.b2body.getWorldCenter(), true);
             MyGdxGame.manager.get("audio/gunshot.wav", Sound.class).play();
         }
@@ -154,16 +130,6 @@ public class playscreen implements Screen {
             Bullet bullet = bulletList.get(i);
          //   bulletList.remove(bulletList.size() - i);
         }
-=======
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
-            ;
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
-            ;
->>>>>>> 3d580c72acc0a7b662ee6683b6a0aa01348094ce
     }
     public void handleInput(float dt) {
 
