@@ -24,8 +24,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -36,9 +34,7 @@ import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.sun.org.glassfish.gmbal.GmbalException;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
@@ -66,7 +62,7 @@ public class playscreen implements Screen {
 
     private Bufflalo player;
     private Enemy enemy;
-    private static java.util.List<Bullet> bulletList;
+    private Bullet bullet;
 
     private Music music;
 
@@ -92,8 +88,8 @@ public class playscreen implements Screen {
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
-        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n')));
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
+        bullet = new Bullet(world);
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -108,24 +104,14 @@ public class playscreen implements Screen {
     }
 
     public void shooting() {
-        //player.b2body.getPosition().x;
-        //player.b2body.getPosition().y;
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            Bullet bullet = new Bullet(world, player, 'w');
-            playscreen.bulletList.add(bullet);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            Bullet bullet = new Bullet(world, player, 'a');
-            playscreen.bulletList.add(bullet);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            Bullet bullet = new Bullet(world, player, 's');
-            playscreen.bulletList.add(bullet);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            Bullet bullet = new Bullet(world, player, 'd');
-            playscreen.bulletList.add(bullet);
-        }
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.A))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.S))
+            ;
+        if(Gdx.input.isKeyPressed(Input.Keys.D))
+            ;
     }
     public void handleInput(float dt) {
 
@@ -141,7 +127,7 @@ public class playscreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
             player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
         }
-
+        
 
 
         //speed up
@@ -190,18 +176,22 @@ public class playscreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         enemy.draw(game.batch);
-       /* if(!bulletList.isEmpty()) {
-            for(int i = 0; i < bulletList.size(); i++) {
-                Bullet bullet =bulletList.get(i);
-                bullet.draw(game.batch);
-                bulletList.remove(i);
-            }
-        }
-        */
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+        if(gameOver()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
+
+    public boolean gameOver(){
+        if(player.currentState == Bufflalo.State.DEAD && player.getStateTimer() > 3){
+            return true;
+        }
+        return false;
     }
 
     @Override
