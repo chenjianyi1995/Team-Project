@@ -1,6 +1,7 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sprites.Bufflalo;
 
 /**
  * Created by Jianyi on 2/26/2017.
@@ -23,7 +25,7 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private Integer worldTime;
+    private static Integer worldTime;
     private float timecount;
     private static Integer score;
     private int level;
@@ -74,10 +76,16 @@ public class Hud implements Disposable{
             currentTime.setText(String.format("%d", worldTime));
             timecount = 0;
         }
+        level = Bufflalo.getLevel();
+        currentLevel.setText(String.format("%d", level));
     }
     public static void addscrore(int value){
         score += value;
         scorelabel.setText(String.format("%d", score));
+        MyGdxGame.manager.get("audio/score.wav", Sound.class).play();
+    }
+    public static Integer getTotTime() {
+        return worldTime;
     }
     @Override
     public void dispose() {
