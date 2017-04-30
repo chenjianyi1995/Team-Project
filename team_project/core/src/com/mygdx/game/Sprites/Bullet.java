@@ -35,7 +35,7 @@ public class Bullet extends Sprite {
 
     public Bullet(World world, Bufflalo player, char direction, playscreen screen){
         super(screen.getAtlas().findRegion("sfireball"));
-        this.world = world;
+        this.world = screen.getWorld();
         this.player = player;
         this.direction = direction;
         defineBullet();

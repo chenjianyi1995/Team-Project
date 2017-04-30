@@ -12,10 +12,6 @@ public class MyGdxGame extends Game {
 	public static final int v_hieght = 800;
 	public static final float PPM = 100;
 
-	public static final short default_bit = 1;
-	public static final short buff_bit = 2;
-	public static final short enemy_bit = 4;
-
 	public SpriteBatch batch;
 
 	public static AssetManager manager;
@@ -36,4 +32,11 @@ public class MyGdxGame extends Game {
 	public void render () {
 		super.render();
 	}
+	@Override
+	public  void dispose(){
+		super.dispose();
+		manager.dispose();
+		batch.dispose();
+	}
 }
+

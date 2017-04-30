@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
-import com.mygdx.game.TextureManager;
+
 
 /**
  * Created by ALwyn on 2017/3/12.
@@ -60,8 +60,7 @@ public class Bufflalo extends Sprite{
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
-        fdef.filter.categoryBits = MyGdxGame.buff_bit;
-        fdef.filter.maskBits = MyGdxGame.default_bit | MyGdxGame.enemy_bit;
+
 
         health = 50;
         level = 1;

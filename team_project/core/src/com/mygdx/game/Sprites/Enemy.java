@@ -61,9 +61,6 @@ public class Enemy extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / MyGdxGame.PPM);
 
-        fdef.filter.categoryBits = MyGdxGame.enemy_bit;
-        fdef.filter.maskBits = MyGdxGame.enemy_bit | MyGdxGame.default_bit | MyGdxGame.buff_bit;
-
         fdef.shape = shape;
         b2body.createFixture(fdef);
     }
