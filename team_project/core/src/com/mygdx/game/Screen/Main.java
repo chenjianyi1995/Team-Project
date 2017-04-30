@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 /**
  * Created by ALwyn on 2017/4/30.
  */
-
+/*
 public class main implements ActionListener {
     main(){
         JFrame f = new JFrame("Menu Demo");
@@ -45,3 +45,4 @@ public class main implements ActionListener {
        System.exit();
     }
 }
+*/

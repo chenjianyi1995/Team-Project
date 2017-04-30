@@ -27,13 +27,13 @@ public class Enemy extends Sprite{
     private static int movSpd;
 
     public Enemy(playscreen screen, float x, float y){
-        super(screen.getAtlas().findRegion("ram"));
+        super(screen.getAtlas().findRegion("RAM"));
 
         this.world = screen.getWorld();
         setPosition(x,y);
         defineEnemy();
-        ramstand = new TextureRegion(getTexture(), 25, 0, 22, 16);
-        setBounds(0,0,22/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        ramstand = new TextureRegion(getTexture(), 67, 0, 14, 16);
+        setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(ramstand);
     }
 

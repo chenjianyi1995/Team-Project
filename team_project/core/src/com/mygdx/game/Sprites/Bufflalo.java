@@ -37,12 +37,12 @@ public class Bufflalo extends Sprite{
 
 
     public Bufflalo(playscreen screen){
-        super(screen.getAtlas().findRegion("buff"));
+        super(screen.getAtlas().findRegion("buffalo"));
         this.world = screen.getWorld();
 
         defineBuffalo();
-        buffstand = new TextureRegion(getTexture(), 0, 0, 22, 16);
-        setBounds(0,0,22/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        buffstand = new TextureRegion(getTexture(), 0, 0, 12, 16);
+        setBounds(0,0,12/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(buffstand);
 
     }
