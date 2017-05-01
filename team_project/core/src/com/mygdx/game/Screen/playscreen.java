@@ -80,7 +80,7 @@ public class playscreen implements Screen {
         world.setContactListener(new WorldCL());
         //enemy = new Enemy(this);
         enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
-        bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(world, player, 'n',this)));
+        //bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(this)));
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -99,37 +99,38 @@ public class playscreen implements Screen {
         //player.b2body.getPosition().y;
         float bulletSpeed = 5f;
         if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            Bullet bullet = new Bullet(world, player, 'w', playscreen.this);
-            playscreen.bulletList.add(bullet);
-            bullet.b2body.applyLinearImpulse(new Vector2(0, bulletSpeed), bullet.b2body.getWorldCenter(), true);
-            MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+           // Bullet bullet = new Bullet(world, player, 'w', playscreen.this);
+            //playscreen.bulletList.add(bullet);
+            //bullet.b2body.applyLinearImpulse(new Vector2(0, bulletSpeed), bullet.b2body.getWorldCenter(), true);
+            //MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+            player.fire();
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            Bullet bullet = new Bullet(world, player, 'a',playscreen.this);
+            /*Bullet bullet = new Bullet(world, player, 'a',playscreen.this);
             playscreen.bulletList.add(bullet);
             bullet.b2body.applyLinearImpulse(new Vector2(-bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
             MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
-        }
+        */}
         else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Bullet bullet = new Bullet(world, player, 's',playscreen.this);
+          /*  Bullet bullet = new Bullet(world, player, 's',playscreen.this);
             playscreen.bulletList.add(bullet);
             bullet.b2body.applyLinearImpulse(new Vector2(0, -bulletSpeed), bullet.b2body.getWorldCenter(), true);
             MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
-        }
+        */}
         else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            Bullet bullet = new Bullet(world, player, 'd',playscreen.this);
+          /*  Bullet bullet = new Bullet(world, player, 'd',playscreen.this);
             playscreen.bulletList.add(bullet);
             bullet.b2body.applyLinearImpulse(new Vector2(bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
             MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
-        }
+        */}
     }
 
     public void removeBullet() {
-        int i;
+        /*int i;
         for(i = 0; i < bulletList.size(); i ++) {
             Bullet bullet = bulletList.get(i);
          //   bulletList.remove(bulletList.size() - i);
-        }
+        }*/
     }
     public void handleInput(float dt) {
 
@@ -145,7 +146,8 @@ public class playscreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
             player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
         }
-        
+
+
 
 
         //speed up
@@ -165,11 +167,15 @@ public class playscreen implements Screen {
             player.b2body.setLinearVelocity(0, 0);
             player.b2body.setAngularVelocity(0);
         }
+
+        //shooting
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W))
+            player.fire();
     }
 
     public void update(float dt){
         handleInput(dt);
-        shooting();
+        //shooting();
 
         removeBullet();
 

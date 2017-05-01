@@ -1,6 +1,7 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
 
@@ -34,21 +36,28 @@ public class Bufflalo extends Sprite{
     private boolean bufflaloIsDead;
     private float stateTimer;
     public Object currentState;
-
+    private Array<Bullet> fireballs;
+    private playscreen screen;
 
     public Bufflalo(playscreen screen){
-        super(screen.getAtlas().findRegion("buffalo"));
+        this.screen = screen;
         this.world = screen.getWorld();
+        stateTimer = 0;
 
         defineBuffalo();
-        buffstand = new TextureRegion(getTexture(), 0, 0, 12, 16);
+        buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 0, 12, 16);
         setBounds(0,0,12/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(buffstand);
-
+        fireballs = new Array<Bullet>();
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        for(Bullet ball : fireballs){
+            ball.update(dt);
+            if(ball.isDestroyed())
+                fireballs.removeValue(ball, true);
+        }
     }
 
     public void defineBuffalo(){
@@ -129,5 +138,13 @@ public class Bufflalo extends Sprite{
 
     public float getStateTimer(){
         return stateTimer;
+    }
+    public void fire(){
+        fireballs.add(new Bullet(screen, b2body.getPosition().x, b2body.getPosition().y, 'w'));
+    }
+    public void draw(Batch batch){
+        super.draw(batch);
+        for(Bullet ball : fireballs)
+            ball.draw(batch);
     }
 }
