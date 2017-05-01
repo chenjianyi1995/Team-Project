@@ -45,12 +45,11 @@ public class Bullet extends Sprite {
         this.world = screen.getWorld();
         this.player = player;
         this.direction = direction;
-
-        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),49, 0,16,16);
-        setRegion(bulletstand);
-        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
-
         defineBullet();
+        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),49, 0,16,16);
+        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        setRegion(bulletstand);
+
     }
 
     private void defineBullet() {
