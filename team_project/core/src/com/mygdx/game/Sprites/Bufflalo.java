@@ -1,5 +1,6 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -139,8 +140,28 @@ public class Bufflalo extends Sprite{
     public float getStateTimer(){
         return stateTimer;
     }
-    public void fire(){
-        fireballs.add(new Bullet(screen, b2body.getPosition().x, b2body.getPosition().y, 'w'));
+    public void fire(char direction){
+        Bullet bullet = new Bullet(this, screen, b2body.getPosition().x, b2body.getPosition().y, direction);
+        fireballs.add(bullet);
+
+        float bulletSpeed = 5f;
+        if(direction == 'w') {
+            bullet.b2body.applyLinearImpulse(new Vector2(0, bulletSpeed), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+        }
+        else if(direction == 'a') {
+            bullet.b2body.applyLinearImpulse(new Vector2(-bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+        }
+        else if(direction == 's') {
+            bullet.b2body.applyLinearImpulse(new Vector2(0, -bulletSpeed), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+        }
+        else if(direction == 'd') {
+            bullet.b2body.applyLinearImpulse(new Vector2(bulletSpeed, 0), bullet.b2body.getWorldCenter(), true);
+            MyGdxGame.manager.get("audio/fireball.wav", Sound.class).play();
+        }
+
     }
     public void draw(Batch batch){
         super.draw(batch);
