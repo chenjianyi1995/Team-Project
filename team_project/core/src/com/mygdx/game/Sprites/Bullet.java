@@ -1,23 +1,16 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.Sprites.Bufflalo;
 import com.mygdx.game.Screen.playscreen;
-import com.mygdx.game.Scenes.Hud;
-import com.sun.org.apache.xpath.internal.operations.String;
 
-import java.awt.image.BufferedImage;
 
 /**
  * Created by zijunxu on 4/3/17.
@@ -36,27 +29,24 @@ public class Bullet extends Sprite {
 
     private char direction;
     private Bufflalo player;
-    private Texture texture;
     Body b2body;
 
-    public Bullet(playscreen screen, float x, float y, char direction){
-        //super(screen.getAtlas().findRegion("sfireball"));
+    public Bullet(Bufflalo player, playscreen screen, float x, float y, char direction){
         this.screen = screen;
         this.world = screen.getWorld();
         this.player = player;
         this.direction = direction;
 
-        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),49, 0,16,16);
-        setRegion(bulletstand);
-        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
-
         defineBullet();
+
+        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),0, 0,16,16);
+        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        setRegion(bulletstand);
     }
 
     private void defineBullet() {
-        //bulletstand = new Texture(Gdx.files.internal("fireball.png"));
         BodyDef bdef = new BodyDef();
-        if(direction == 'w') bdef.position.set(getX(),getY());
+        if(direction == 'w') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight() + this.getHeight()/2);
         else if(direction == 'a') bdef.position.set(player.getX() + this.getWidth(), player.getY() + player.getHeight()/2);
         else if(direction == 's') bdef.position.set(player.getX() + player.getHeight()/2, player.getY() + this.getHeight());
         else if(direction == 'd') bdef.position.set(player.getX() + player.getWidth() + this.getWidth(), player.getY() + player.getHeight()/2);
@@ -69,10 +59,14 @@ public class Bullet extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+
+
     }
 
     public void update(float dt){
         statetime += dt;
+        setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
         if((statetime > 2 || setToDestroyed) && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;

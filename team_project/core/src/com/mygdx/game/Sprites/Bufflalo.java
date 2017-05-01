@@ -140,7 +140,7 @@ public class Bufflalo extends Sprite{
         return stateTimer;
     }
     public void fire(){
-        fireballs.add(new Bullet(screen, b2body.getPosition().x, b2body.getPosition().y, 'w'));
+        fireballs.add(new Bullet(this, screen, b2body.getPosition().x, b2body.getPosition().y, 'w'));
     }
     public void draw(Batch batch){
         super.draw(batch);
