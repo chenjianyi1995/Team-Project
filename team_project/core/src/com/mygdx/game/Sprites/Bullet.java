@@ -40,8 +40,8 @@ public class Bullet extends Sprite {
 
         defineBullet();
 
-        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),0, 0,16,16);
-        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        bulletstand = new TextureRegion(screen.getAtlas().findRegion("fireball"),4, 5,9,9);
+        setBounds(0,0,18/MyGdxGame.PPM,18/MyGdxGame.PPM);
         setRegion(bulletstand);
     }
 
