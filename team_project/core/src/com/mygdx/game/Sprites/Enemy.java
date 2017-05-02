@@ -21,6 +21,9 @@ public class Enemy extends Sprite{
     public Body b2body;
     private TextureRegion ramstand;
 
+    private boolean setToDestroyed;
+    private boolean destroyed;
+
     private static int health;
     private static int level;
     private static int damage;
@@ -35,6 +38,8 @@ public class Enemy extends Sprite{
         ramstand = new TextureRegion(screen.getAtlas().findRegion("RAM"), 0, 0, 14, 16);
         setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(ramstand);
+        setToDestroyed = false;
+        destroyed = false;
     }
 
     public Enemy(Body b2body) {
@@ -61,14 +66,23 @@ public class Enemy extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / MyGdxGame.PPM);
 
+        fdef.filter.categoryBits = MyGdxGame.RAM_BIT;
+        fdef.filter.maskBits = MyGdxGame.FIREBALL_BIT |
+                MyGdxGame.GROUND_BIT|
+                MyGdxGame.BUFFALO_BIT;
+
         fdef.shape = shape;
         b2body.createFixture(fdef);
     }
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        if(setToDestroyed && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+        }
         setLevel(dt);
     }
-
+    public void hit(Bufflalo bufflalo) { setToDestroyed = true; }
     public static int getLevel() {
         return level;
     }

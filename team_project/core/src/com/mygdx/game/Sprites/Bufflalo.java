@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -168,4 +170,18 @@ public class Bufflalo extends Sprite{
         for(Bullet ball : fireballs)
             ball.draw(batch);
     }
+    public void die(){
+        if(!isDead()){
+            bufflaloIsDead = true;
+            Filter filter = new Filter();
+            filter.maskBits = MyGdxGame.NOTHING_BIT;
+            for (Fixture fixture : b2body.getFixtureList()){
+                fixture.setFilterData(filter);
+            }
+        }
+    }
+    public boolean isdead(){
+        return bufflaloIsDead;
+    }
+
 }
