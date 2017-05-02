@@ -2,6 +2,7 @@ package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
-
+import java.util.Random;
 /**
  * Created by JonYoung on 3/5/17.
  */
@@ -28,7 +29,8 @@ public class Enemy extends Sprite{
     private static int level;
     private static int damage;
     private static int movSpd;
-
+    Random rand = new Random();
+    public Vector2 velocity;
     public Enemy(playscreen screen, float x, float y){
        // super(screen.getAtlas().findRegion("RAM"));
 
@@ -40,6 +42,25 @@ public class Enemy extends Sprite{
         setRegion(ramstand);
         setToDestroyed = false;
         destroyed = false;
+
+            int n = rand.nextInt(8) + 1;
+            if (n == 1) {
+                velocity = new Vector2(1, 0);
+            } else if (n == 2) {
+                velocity = new Vector2(-1, 0);
+            } else if (n == 3) {
+                velocity = new Vector2(0, 1);
+            } else if (n == 4) {
+                velocity = new Vector2(0, -1);
+            } else if (n == 5) {
+                velocity = new Vector2(1, 1);
+            } else if (n == 6) {
+                velocity = new Vector2(-1,-1);
+            } else if (n == 7) {
+                velocity = new Vector2(1, -1);
+            } else if (n == 8) {
+                velocity = new Vector2(-1, 1);
+            }
     }
 
     public Enemy(Body b2body) {
@@ -81,6 +102,7 @@ public class Enemy extends Sprite{
             destroyed = true;
         }
         setLevel(dt);
+        b2body.setLinearVelocity(velocity);
     }
     public void hit(Bufflalo bufflalo) { setToDestroyed = true; }
     public static int getLevel() {
