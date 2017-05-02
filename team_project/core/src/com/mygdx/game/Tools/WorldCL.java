@@ -1,6 +1,7 @@
 package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -13,12 +14,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 public class WorldCL implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
-
+        //Gdx.app.log("Begin Contact", "");
     }
 
     @Override
     public void endContact(Contact contact) {
-
+        //Gdx.app.log("End Contact", "");
     }
 
     @Override
