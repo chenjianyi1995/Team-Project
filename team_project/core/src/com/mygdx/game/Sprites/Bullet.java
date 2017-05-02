@@ -37,6 +37,7 @@ public class Bullet extends Sprite {
         this.player = player;
         this.direction = direction;
 
+
         defineBullet();
 
         bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),0, 0,16,16);
