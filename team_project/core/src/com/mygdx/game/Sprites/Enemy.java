@@ -2,16 +2,21 @@ package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+<<<<<<< HEAD
+=======
+import com.badlogic.gdx.physics.box2d.Filter;
+>>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
-
+import java.util.Random;
 /**
  * Created by JonYoung on 3/5/17.
  */
@@ -22,32 +27,65 @@ public class Enemy extends Sprite{
     public Body b2body;
     private TextureRegion ramstand;
 
+<<<<<<< HEAD
+=======
+    private boolean setToDestroyed;
+    private boolean destroyed;
+>>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
 
     private static int health;
     private static int level;
     private static int damage;
     private static int movSpd;
-
+    Random rand = new Random();
+    public Vector2 velocity;
     public Enemy(playscreen screen, float x, float y){
        // super(screen.getAtlas().findRegion("RAM"));
-
+        this.screen = screen;
         this.world = screen.getWorld();
         setPosition(x,y);
-        defineEnemy();
+
         ramstand = new TextureRegion(screen.getAtlas().findRegion("RAM"), 0, 0, 14, 16);
-        setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(ramstand);
-    }
+        setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        defineEnemy();
+        //setToDestroyed = false;
+        //destroyed = false;
 
-    public Enemy(Body b2body) {
-        this.b2body = b2body;
+            int n = rand.nextInt(8) + 1;
+            if (n == 1) {
+                velocity = new Vector2(2, 0);
+            } else if (n == 2) {
+                velocity = new Vector2(-2, 0);
+            } else if (n == 3) {
+                velocity = new Vector2(0, 2);
+            } else if (n == 4) {
+                velocity = new Vector2(0, -2);
+            } else if (n == 5) {
+                velocity = new Vector2(2, 2);
+            } else if (n == 6) {
+                velocity = new Vector2(-2,-2);
+            } else if (n == 7) {
+                velocity = new Vector2(2, -2);
+            } else if (n == 8) {
+                velocity = new Vector2(-2, 2);
+            }
     }
-
-    public Enemy(Sprite sprite, Body b2body) {
-        super(sprite);
-        this.b2body = b2body;
+    public void update(float dt){
+        //setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        if(setToDestroyed && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+            Filter filter = new Filter();
+            filter.maskBits = MyGdxGame.NOTHING_BIT;
+            for (Fixture fixture : b2body.getFixtureList())
+                fixture.setFilterData(filter);
+        }
+        else if(!destroyed)
+            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        setLevel(dt);
+        //b2body.setLinearVelocity(velocity);
     }
-
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
         bdef.position.set(1380 / MyGdxGame.PPM, 1320 / MyGdxGame.PPM);
@@ -63,14 +101,31 @@ public class Enemy extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / MyGdxGame.PPM);
 
+        fdef.filter.categoryBits = MyGdxGame.RAM_BIT;
+        fdef.filter.maskBits = MyGdxGame.FIREBALL_BIT |
+                MyGdxGame.GROUND_BIT|
+                MyGdxGame.BUFFALO_BIT;
+
         fdef.shape = shape;
+<<<<<<< HEAD
         b2body.createFixture(fdef).setUserData("ram");
+=======
+        b2body.createFixture(fdef).setUserData(this);
+<<<<<<< HEAD
+>>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
     }
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        if(setToDestroyed && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+        }
         setLevel(dt);
+        b2body.setLinearVelocity(velocity);
+=======
+>>>>>>> 28fb7f16b3e2bdf342c2fcf1a842c6926f6170c1
     }
-
+    public void hit() { setToDestroyed = true; }
     public static int getLevel() {
         return level;
     }
@@ -101,5 +156,19 @@ public class Enemy extends Sprite{
     }
     public void setMovSpd() {
 
+    }
+    public void reverseVelocity(boolean x, boolean y){
+        if (velocity.x>0 && velocity.y>0)
+            velocity.y = -velocity.y;
+        if (velocity.x>0 && velocity.y<0)
+            velocity.x = -velocity.x;
+        if (velocity.x<0 && velocity.y>0)
+            velocity.y = -velocity.y;
+        if (velocity.x<0 && velocity.y<0)
+            velocity.x = -velocity.x;
+        if (velocity.x == 0)
+            velocity.y = -velocity.y;
+        if (velocity.y == 0)
+            velocity.x = -velocity.x;
     }
 }

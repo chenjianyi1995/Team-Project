@@ -1,16 +1,17 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -23,9 +24,14 @@ import com.mygdx.game.Screen.playscreen;
  */
 
 public class Bufflalo extends Sprite{
+    public enum State {DEAD};
+
     public World world;
     public static Body b2body;
+
     private TextureRegion buffstand;
+    private TextureRegion bufflaloDead;
+
 
     private static int health;
     private static int level;
@@ -47,6 +53,9 @@ public class Bufflalo extends Sprite{
 
         defineBuffalo();
         buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 0, 12, 16);
+        bufflaloDead= new TextureRegion(screen.getAtlas().findRegion("buffalo"), 72, 0, 12, 16);
+
+
         setBounds(0,0,12/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(buffstand);
         fireballs = new Array<Bullet>();
@@ -59,7 +68,11 @@ public class Bufflalo extends Sprite{
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
+        /*if(!isDead())
+            die();*/
     }
+
+
 
     public void defineBuffalo(){
         BodyDef bdef = new BodyDef();
@@ -137,6 +150,30 @@ public class Bufflalo extends Sprite{
     public void setMovSpd() {
         movSpd ++;
     }
+
+    public State getState() {
+        if (bufflaloIsDead)
+            return State.DEAD;
+        return null;
+    }
+    public void hit(Enemy userData) {
+
+        if (!isDead()) {
+
+            MyGdxGame.manager.get("audio/background.ogg",Music.class).stop();
+            MyGdxGame.manager.get("audio/gameover.wav", Sound.class).play();
+            bufflaloIsDead = true;
+            Filter filter = new Filter();
+            filter.maskBits = MyGdxGame.NOTHING_BIT;
+
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+
+            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+        }
+    }
+
     public boolean isDead(){
         return bufflaloIsDead;
     }

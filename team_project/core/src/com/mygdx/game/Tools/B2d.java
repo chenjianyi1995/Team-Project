@@ -50,6 +50,7 @@ public class B2d {
 
             shape.setAsBox(rect.getWidth() / 2 / MyGdxGame.PPM, rect.getHeight() / 2 / MyGdxGame.PPM);
             fdef.shape = shape;
+            fdef.filter.categoryBits = MyGdxGame.GROUND_BIT;
             body.createFixture(fdef);
         }
     }

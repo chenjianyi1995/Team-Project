@@ -98,51 +98,53 @@ public class playscreen implements Screen {
 
 
     public void handleInput(float dt) {
+        if (player.currentState != Bufflalo.State.DEAD) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
-            player.b2body.applyLinearImpulse(new Vector2(0.1f * player.getMovSpd(), 0), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
-            player.b2body.applyLinearImpulse(new Vector2(-0.1f * player.getMovSpd(), 0), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= 2) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
-            player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
-        }
-
-
-        //speed up
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 5) {
-            player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -5) {
-            player.b2body.applyLinearImpulse(new Vector2(-2f, 0), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y <= 5) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -5) {
-            player.b2body.applyLinearImpulse(new Vector2(0, -2f), player.b2body.getWorldCenter(), true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            player.b2body.setLinearVelocity(0, 0);
-            player.b2body.setAngularVelocity(0);
-        }
-
-        //shooting
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.A) || Gdx.input.isKeyJustPressed(Input.Keys.S) || Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                direction = 'w';
-            } else if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-                direction = 'a';
-            } else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-                direction = 's';
-            } else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-                direction = 'd';
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+                player.b2body.applyLinearImpulse(new Vector2(0.1f * player.getMovSpd(), 0), player.b2body.getWorldCenter(), true);
             }
-        player.fire(direction);
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+                player.b2body.applyLinearImpulse(new Vector2(-0.1f * player.getMovSpd(), 0), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= 2) {
+                player.b2body.applyLinearImpulse(new Vector2(0, 0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -2) {
+                player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
+            }
+
+
+            //speed up
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 5) {
+                player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -5) {
+                player.b2body.applyLinearImpulse(new Vector2(-2f, 0), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y <= 5) {
+                player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -5) {
+                player.b2body.applyLinearImpulse(new Vector2(0, -2f), player.b2body.getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                player.b2body.setLinearVelocity(0, 0);
+                player.b2body.setAngularVelocity(0);
+            }
+
+            //shooting
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.A) || Gdx.input.isKeyJustPressed(Input.Keys.S) || Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                    direction = 'w';
+                } else if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+                    direction = 'a';
+                } else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                    direction = 's';
+                } else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                    direction = 'd';
+                }
+                player.fire(direction);
+            }
         }
     }
 
@@ -154,8 +156,11 @@ public class playscreen implements Screen {
         enemy.update(dt);
         hud.update(dt);
 
-        gamecam.position.x = player.b2body.getPosition().x;
-        gamecam.position.y = player.b2body.getPosition().y;
+        if(player.currentState != Bufflalo.State.DEAD) {
+            gamecam.position.x = player.b2body.getPosition().x;
+            gamecam.position.y = player.b2body.getPosition().y;
+        }
+
         gamecam.update();
         renderer.setView(gamecam);
     }
@@ -171,25 +176,24 @@ public class playscreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-
         enemy.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-      /*  if(gameOver()){
+        if(gameOver()){
             game.setScreen(new GameOverScreen(game));
             dispose();
-        }*/
+        }
     }
 
-   /* public boolean gameOver(){
+    public boolean gameOver(){
         if(player.currentState == Bufflalo.State.DEAD && player.getStateTimer() > 3){
             return true;
         }
         return false;
-    }*/
+    }
 
     @Override
     public void resize(int width, int height) {
@@ -228,4 +232,5 @@ public class playscreen implements Screen {
         b2dr.dispose();
         hud.dispose();
     }
+
 }

@@ -40,8 +40,8 @@ public class Bullet extends Sprite {
 
         defineBullet();
 
-        bulletstand = new TextureRegion(screen.getAtlas().findRegion("sfireball"),0, 0,16,16);
-        setBounds(0,0,16/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        bulletstand = new TextureRegion(screen.getAtlas().findRegion("fireball"),4, 5,9,9);
+        setBounds(0,0,18/MyGdxGame.PPM,18/MyGdxGame.PPM);
         setRegion(bulletstand);
     }
 
@@ -56,10 +56,19 @@ public class Bullet extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10/ MyGdxGame.PPM);
+        shape.setRadius(5/ MyGdxGame.PPM);
 
+        fdef.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
+        fdef.filter.maskBits = MyGdxGame.BUFFALO_BIT |
+                MyGdxGame.GROUND_BIT |
+                MyGdxGame.OBJECT_BIT |
+                MyGdxGame.RAM_BIT;
         fdef.shape = shape;
+<<<<<<< HEAD
         b2body.createFixture(fdef).setUserData("bullet");
+=======
+        b2body.createFixture(fdef).setUserData(this);
+>>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
 
 
 
