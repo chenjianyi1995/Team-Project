@@ -58,11 +58,11 @@ public class Bullet extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
-     /*   fdef.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
+        fdef.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
         fdef.filter.maskBits = MyGdxGame.BUFFALO_BIT |
                 MyGdxGame.GROUND_BIT |
                 MyGdxGame.OBJECT_BIT |
-                MyGdxGame.RAM_BIT;*/
+                MyGdxGame.RAM_BIT;
         fdef.shape = shape;
 
 

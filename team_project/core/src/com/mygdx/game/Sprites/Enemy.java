@@ -25,7 +25,7 @@ public class Enemy extends Sprite{
     private TextureRegion ramstand;
 
     private boolean setToDestroyed;
-    private boolean destroyed;
+    boolean destroyed;
 
     private static int health;
     private static int level;
@@ -70,11 +70,13 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
+
         }
-        else if(!destroyed)
-            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        else if(!destroyed) {
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+            b2body.setLinearVelocity(velocity);
+        }
         setLevel(dt);
-        //b2body.setLinearVelocity(velocity);
     }
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
@@ -91,17 +93,17 @@ public class Enemy extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / MyGdxGame.PPM);
 
-     /*   fdef.filter.categoryBits = MyGdxGame.RAM_BIT;
+        fdef.filter.categoryBits = MyGdxGame.RAM_BIT;
         fdef.filter.maskBits = MyGdxGame.FIREBALL_BIT |
                 MyGdxGame.GROUND_BIT|
                 MyGdxGame.BUFFALO_BIT;
-*/
         fdef.shape = shape;
 
         b2body.createFixture(fdef).setUserData(this);
 
     }
     public void hit() { setToDestroyed = true; }
+    public boolean isDestroyed() {return destroyed;}
     public static int getLevel() {
         return level;
     }
@@ -120,9 +122,6 @@ public class Enemy extends Sprite{
             diff = Hud.getTotTime() / 10;
         }
         level = level + (level * (diff/10));
-    }
-    public void onBulletHit(){
-
     }
     public void setHealth() {
 

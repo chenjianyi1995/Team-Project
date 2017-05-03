@@ -22,7 +22,6 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Bufflalo;
 import com.mygdx.game.Sprites.Bullet;
-import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Tools.B2d;
 import com.mygdx.game.Tools.WorldCL;
 import com.sun.jmx.remote.internal.ArrayQueue;
@@ -53,7 +52,6 @@ public class playscreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private Bufflalo player;
-    private Enemy enemy;
     private static java.util.List<Bullet> bulletList;
     private char direction;
 
@@ -80,9 +78,6 @@ public class playscreen implements Screen {
         new B2d(this);
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
-        //enemy = new Enemy(this);
-        enemy = new Enemy(this,32/MyGdxGame.PPM,32/MyGdxGame.PPM);
-        //bulletList = new ArrayList<Bullet>(Arrays.asList(new Bullet(this)));
         music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
         music.setLooping(true);
         music.play();
@@ -153,7 +148,6 @@ public class playscreen implements Screen {
 
         world.step(1/60f, 6, 2);
         player.update(dt);
-        enemy.update(dt);
         hud.update(dt);
 
         if(player.currentState != Bufflalo.State.DEAD) {
@@ -176,7 +170,6 @@ public class playscreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        enemy.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -189,7 +182,7 @@ public class playscreen implements Screen {
     }
 
     public boolean gameOver(){
-        if(player.currentState == Bufflalo.State.DEAD && player.getStateTimer() > 3){
+        if(player.currentState == Bufflalo.State.DEAD){
             return true;
         }
         return false;
