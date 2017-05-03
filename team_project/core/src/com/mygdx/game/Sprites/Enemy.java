@@ -47,7 +47,7 @@ public class Enemy extends Sprite{
         defineEnemy();
         //setToDestroyed = false;
         //destroyed = false;
-
+            //Enemy randomly move to 12 directions.
             int n = rand.nextInt(12) + 1;
             if (n == 1) {
                 velocity = new Vector2(2, 1);
@@ -80,6 +80,7 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
+            Hud.addscore(1);
 
         }
 
@@ -95,10 +96,10 @@ public class Enemy extends Sprite{
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        health = 20;
+        /*health = 20;
         level = 1;
         damage = 5;
-        movSpd = 1;
+        movSpd = 1;*/
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -146,7 +147,7 @@ public class Enemy extends Sprite{
     public void setMovSpd() {
 
     }
-    public void reverseVelocity(boolean x, boolean y){
+    public void reverseVelocity(boolean x, boolean y){  //Enemy bounce back when hitting walls.
         /*if (velocity.x>0 && velocity.y>0)
             velocity.y = -velocity.y;
         if (velocity.x>0 && velocity.y<0)
