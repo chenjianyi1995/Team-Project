@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
@@ -33,15 +35,16 @@ public class Enemy extends Sprite{
     public Vector2 velocity;
     public Enemy(playscreen screen, float x, float y){
        // super(screen.getAtlas().findRegion("RAM"));
-
+        this.screen = screen;
         this.world = screen.getWorld();
         setPosition(x,y);
-        defineEnemy();
+
         ramstand = new TextureRegion(screen.getAtlas().findRegion("RAM"), 0, 0, 14, 16);
-        setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(ramstand);
-        setToDestroyed = false;
-        destroyed = false;
+        setBounds(0,0,14/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        defineEnemy();
+        //setToDestroyed = false;
+        //destroyed = false;
 
             int n = rand.nextInt(8) + 1;
             if (n == 1) {
@@ -62,16 +65,21 @@ public class Enemy extends Sprite{
                 velocity = new Vector2(-1, 1);
             }
     }
-
-    public Enemy(Body b2body) {
-        this.b2body = b2body;
+    public void update(float dt){
+        //setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        if(setToDestroyed && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+            Filter filter = new Filter();
+            filter.maskBits = MyGdxGame.NOTHING_BIT;
+            for (Fixture fixture : b2body.getFixtureList())
+                fixture.setFilterData(filter);
+        }
+        else if(!destroyed)
+            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        setLevel(dt);
+        //b2body.setLinearVelocity(velocity);
     }
-
-    public Enemy(Sprite sprite, Body b2body) {
-        super(sprite);
-        this.b2body = b2body;
-    }
-
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
         bdef.position.set(1380 / MyGdxGame.PPM, 1320 / MyGdxGame.PPM);
@@ -93,18 +101,9 @@ public class Enemy extends Sprite{
                 MyGdxGame.BUFFALO_BIT;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
     }
-    public void update(float dt){
-        setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
-        if(setToDestroyed && !destroyed){
-            world.destroyBody(b2body);
-            destroyed = true;
-        }
-        setLevel(dt);
-        b2body.setLinearVelocity(velocity);
-    }
-    public void hit(Bufflalo bufflalo) { setToDestroyed = true; }
+    public void hit() { setToDestroyed = true; }
     public static int getLevel() {
         return level;
     }

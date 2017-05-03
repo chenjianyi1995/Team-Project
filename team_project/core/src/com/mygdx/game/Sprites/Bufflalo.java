@@ -61,6 +61,8 @@ public class Bufflalo extends Sprite{
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
+        /*if(!isDead())
+            die();*/
     }
 
     public void defineBuffalo(){

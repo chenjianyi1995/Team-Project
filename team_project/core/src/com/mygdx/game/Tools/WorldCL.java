@@ -22,7 +22,16 @@ public class WorldCL implements ContactListener {
         Fixture fixB = contact.getFixtureB();
         int cdef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (cdef){
-            case MyGdxGame.RAM_BIT | MyGdxGame.BUFFALO_BIT:
+
+            case MyGdxGame.BUFFALO_BIT | MyGdxGame.RAM_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
+                    ((Bufflalo) fixA.getUserData()).die();
+                else
+                    ((Bufflalo) fixB.getUserData()).die();
+                break;
+
+            /*
+            case MyGdxGame.RAM_BIT | MyGdxGame.FIREBALL_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.RAM_BIT){
                     ((Enemy)fixA.getUserData()).hit((Bufflalo) fixB.getUserData());
                 }
@@ -31,11 +40,17 @@ public class WorldCL implements ContactListener {
                     ((Enemy)fixB.getUserData()).hit((Bufflalo) fixA.getUserData());
                 }
                 break;
+            */
             case MyGdxGame.FIREBALL_BIT | MyGdxGame.RAM_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT)
+
+                if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
                     ((Bullet)fixA.getUserData()).setToDestroyed();
-                else
+                    ((Enemy)fixB.getUserData()).hit();
+                }
+
+                else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT)
                     ((Bullet)fixB.getUserData()).setToDestroyed();
+                    ((Enemy)fixA.getUserData()).hit();
                 break;
         }
     }
