@@ -52,9 +52,9 @@ public class Hud implements Disposable{
         table.top();
         table.setFillParent(true);
 
-        scorelabel = new Label("SCORE", new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scorelabel = new Label("Score", new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
         totalScore = new Label(String.format("%d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timelabel = new Label("TIME", new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timelabel = new Label("Time", new  Label.LabelStyle(new BitmapFont(), Color.WHITE));
         currentTime = new Label(String.format("%d", worldTime), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levellabel = new Label("Level", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         currentLevel = new Label(String.format("%d", level), new Label.LabelStyle(new BitmapFont(), Color.WHITE));

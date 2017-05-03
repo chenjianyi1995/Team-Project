@@ -12,13 +12,15 @@ public class MyGdxGame extends Game {
 	public static final int v_hieght = 800;
 	public static final float PPM = 100;
 
+
 	//collisons
 	public static final short NOTHING_BIT = 0;
-	public static final short BUFFALO_BIT = 1;
+	public static final short BUFFALO_BIT = 8;
 	public static final short RAM_BIT = 2;
 	public static final short FIREBALL_BIT = 16;
-	public static final short GROUND_BIT = 8;
+	public static final short GROUND_BIT = 1;
 	public static final short OBJECT_BIT = 4;
+
 
 
 	public SpriteBatch batch;
