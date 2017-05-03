@@ -87,10 +87,6 @@ public class Enemy extends Sprite{
             b2body.setLinearVelocity(velocity);
         }
         setLevel(dt);
-<<<<<<< HEAD
-=======
-        b2body.setLinearVelocity(velocity);
->>>>>>> 25764a80ca5add7e011e16d4ace820ab0d392066
     }
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
@@ -111,10 +107,7 @@ public class Enemy extends Sprite{
         fdef.filter.maskBits = MyGdxGame.FIREBALL_BIT |
                 MyGdxGame.GROUND_BIT|
                 MyGdxGame.BUFFALO_BIT;
-<<<<<<< HEAD
-=======
 
->>>>>>> 25764a80ca5add7e011e16d4ace820ab0d392066
         fdef.shape = shape;
 
         b2body.createFixture(fdef).setUserData(this);
