@@ -1,7 +1,9 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,7 +19,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screen.playscreen;
+
+import java.util.Random;
 
 
 /**
@@ -47,10 +52,14 @@ public class Bufflalo extends Sprite{
     private Array<Bullet> fireballs;
     private playscreen screen;
     private Array<Enemy> enemies;
+    private int spawns;
+    private float spawnTime;
 
     public Bufflalo(playscreen screen){
         this.screen = screen;
         this.world = screen.getWorld();
+
+        spawns = 0;
 
         defineBuffalo();
         buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 0, 12, 16);
@@ -78,6 +87,7 @@ public class Bufflalo extends Sprite{
                 enemies.removeValue(enemy, true);
             }
         }
+
         generateEnemy(dt);
     }
 
@@ -93,7 +103,6 @@ public class Bufflalo extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
-
         health = 50;
         level = 1;
         experience = 0;
@@ -105,12 +114,6 @@ public class Bufflalo extends Sprite{
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
 
-     /*   EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2/MyGdxGame.PPM, 5/MyGdxGame.PPM),new Vector2(2/MyGdxGame.PPM, 5/MyGdxGame.PPM) );
-        fdef.shape = head;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef).setUserData("head"); */
     }
     public void onEnemyHit() {
     }
@@ -203,10 +206,41 @@ public class Bufflalo extends Sprite{
     }
     public void generateEnemy(float dt){
         stateTime += dt;
-        if(stateTime >= 2){
-            Enemy enemy = new Enemy(screen, 1380/MyGdxGame.PPM, 1320/MyGdxGame.PPM);
-            enemies.add(enemy);
+        int currentTime = (int) stateTime;
+        if(currentTime == 2 && spawns <= 3){
+            Random rand = new Random();
+            int value = rand.nextInt(4);
+            spawns = value;
             stateTime = 0;
+        }
+
+        switch (spawns) {
+            case 0:
+                spawnEnemy(1380, 1320, 3, dt);
+                break;
+            case 1:
+                spawnEnemy(1800, 200, 3, dt);
+                break;
+            case 2:
+                spawnEnemy(400, 1200, 3, dt);
+                break;
+            case 3:
+                spawnEnemy(2400, 1000, 3, dt);
+                break;
+
+        }
+        if(spawns > 3) {
+            spawns = 0;
+        }
+
+    }
+    public void spawnEnemy(float x, float y, int rate, float dt){
+        spawnTime += dt;
+        int currentSpawnTime = (int) spawnTime;
+        if (currentSpawnTime == rate) {
+            Enemy enemy = new Enemy(screen, x, y);
+            enemies.add(enemy);
+            spawnTime = 0;
         }
     }
     public void draw(Batch batch){

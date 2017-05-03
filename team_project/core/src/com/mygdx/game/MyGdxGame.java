@@ -7,9 +7,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screen.playscreen;
 
+import java.awt.Toolkit;
+
 public class MyGdxGame extends Game {
-	public static final int v_width = 480;
-	public static final int v_hieght = 800;
+	public static final int v_width = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public static final int v_hieght = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public static final float PPM = 100;
 
 

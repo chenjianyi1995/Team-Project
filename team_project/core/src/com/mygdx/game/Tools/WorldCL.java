@@ -46,12 +46,6 @@ public class WorldCL implements ContactListener {
                     ((Enemy) fixA.getUserData()).hit();
                 }
                 break;
-            case MyGdxGame.RAM_BIT | MyGdxGame.GROUND_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.RAM_BIT)
-                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                else
-                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                break;
         }
     }
 

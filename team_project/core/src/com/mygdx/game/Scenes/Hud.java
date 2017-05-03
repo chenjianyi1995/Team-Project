@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Bufflalo;
 
+import java.io.InputStream;
+
 /**
  * Created by Jianyi on 2/26/2017.
  */
@@ -87,6 +89,7 @@ public class Hud implements Disposable{
     public static Integer getTotTime() {
         return worldTime;
     }
+
     @Override
     public void dispose() {
         stage.dispose();
