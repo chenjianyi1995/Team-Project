@@ -1,5 +1,6 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
 import com.mygdx.game.Scenes.Hud;
@@ -46,15 +48,15 @@ public class Enemy extends Sprite{
         //setToDestroyed = false;
         //destroyed = false;
 
-            int n = rand.nextInt(8) + 1;
+            int n = rand.nextInt(12) + 1;
             if (n == 1) {
-                velocity = new Vector2(2, 0);
+                velocity = new Vector2(2, 1);
             } else if (n == 2) {
-                velocity = new Vector2(-2, 0);
+                velocity = new Vector2(-2, 1);
             } else if (n == 3) {
-                velocity = new Vector2(0, 2);
+                velocity = new Vector2(1, 2);
             } else if (n == 4) {
-                velocity = new Vector2(0, -2);
+                velocity = new Vector2(1, -2);
             } else if (n == 5) {
                 velocity = new Vector2(2, 2);
             } else if (n == 6) {
@@ -63,10 +65,18 @@ public class Enemy extends Sprite{
                 velocity = new Vector2(2, -2);
             } else if (n == 8) {
                 velocity = new Vector2(-2, 2);
+            } else if (n == 9) {
+                velocity = new Vector2(2, 0);
+            } else if (n == 10) {
+                velocity = new Vector2(-2, 0);
+            } else if (n == 11) {
+                velocity = new Vector2(0, 2);
+            } else if (n == 12) {
+                velocity = new Vector2(0, -2);
             }
     }
     public void update(float dt){
-        //setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
@@ -77,6 +87,10 @@ public class Enemy extends Sprite{
             b2body.setLinearVelocity(velocity);
         }
         setLevel(dt);
+<<<<<<< HEAD
+=======
+        b2body.setLinearVelocity(velocity);
+>>>>>>> 25764a80ca5add7e011e16d4ace820ab0d392066
     }
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
@@ -97,6 +111,10 @@ public class Enemy extends Sprite{
         fdef.filter.maskBits = MyGdxGame.FIREBALL_BIT |
                 MyGdxGame.GROUND_BIT|
                 MyGdxGame.BUFFALO_BIT;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25764a80ca5add7e011e16d4ace820ab0d392066
         fdef.shape = shape;
 
         b2body.createFixture(fdef).setUserData(this);
@@ -133,7 +151,7 @@ public class Enemy extends Sprite{
 
     }
     public void reverseVelocity(boolean x, boolean y){
-        if (velocity.x>0 && velocity.y>0)
+        /*if (velocity.x>0 && velocity.y>0)
             velocity.y = -velocity.y;
         if (velocity.x>0 && velocity.y<0)
             velocity.x = -velocity.x;
@@ -144,6 +162,8 @@ public class Enemy extends Sprite{
         if (velocity.x == 0)
             velocity.y = -velocity.y;
         if (velocity.y == 0)
-            velocity.x = -velocity.x;
+            velocity.x = -velocity.x;*/
+        velocity.x = -velocity.x;
+        velocity.y = -velocity.y;
     }
 }
