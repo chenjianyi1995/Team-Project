@@ -22,20 +22,18 @@ public class WorldCL implements ContactListener {
         Fixture fixB = contact.getFixtureB();
         int cdef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (cdef){
-            case MyGdxGame.RAM_BIT | MyGdxGame.BUFFALO_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.RAM_BIT){
-                    ((Enemy)fixA.getUserData()).hit((Bufflalo) fixB.getUserData());
-                }
-                else
-                {
-                    ((Enemy)fixB.getUserData()).hit((Bufflalo) fixA.getUserData());
-                }
-                break;
+
             case MyGdxGame.FIREBALL_BIT | MyGdxGame.RAM_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT)
                     ((Bullet)fixA.getUserData()).setToDestroyed();
                 else
                     ((Bullet)fixB.getUserData()).setToDestroyed();
+                break;
+            case MyGdxGame.RAM_BIT | MyGdxGame.GROUND_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.RAM_BIT)
+                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                else
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
         }
     }

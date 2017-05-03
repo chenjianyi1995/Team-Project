@@ -45,21 +45,21 @@ public class Enemy extends Sprite{
 
             int n = rand.nextInt(8) + 1;
             if (n == 1) {
-                velocity = new Vector2(1, 0);
+                velocity = new Vector2(2, 0);
             } else if (n == 2) {
-                velocity = new Vector2(-1, 0);
+                velocity = new Vector2(-2, 0);
             } else if (n == 3) {
-                velocity = new Vector2(0, 1);
+                velocity = new Vector2(0, 2);
             } else if (n == 4) {
-                velocity = new Vector2(0, -1);
+                velocity = new Vector2(0, -2);
             } else if (n == 5) {
-                velocity = new Vector2(1, 1);
+                velocity = new Vector2(2, 2);
             } else if (n == 6) {
-                velocity = new Vector2(-1,-1);
+                velocity = new Vector2(-2,-2);
             } else if (n == 7) {
-                velocity = new Vector2(1, -1);
+                velocity = new Vector2(2, -2);
             } else if (n == 8) {
-                velocity = new Vector2(-1, 1);
+                velocity = new Vector2(-2, 2);
             }
     }
 
@@ -93,7 +93,7 @@ public class Enemy extends Sprite{
                 MyGdxGame.BUFFALO_BIT;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
     }
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
@@ -132,5 +132,19 @@ public class Enemy extends Sprite{
     }
     public void setMovSpd() {
 
+    }
+    public void reverseVelocity(boolean x, boolean y){
+        if (velocity.x>0 && velocity.y>0)
+            velocity.y = -velocity.y;
+        if (velocity.x>0 && velocity.y<0)
+            velocity.x = -velocity.x;
+        if (velocity.x<0 && velocity.y>0)
+            velocity.y = -velocity.y;
+        if (velocity.x<0 && velocity.y<0)
+            velocity.x = -velocity.x;
+        if (velocity.x == 0)
+            velocity.y = -velocity.y;
+        if (velocity.y == 0)
+            velocity.x = -velocity.x;
     }
 }
