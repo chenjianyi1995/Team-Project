@@ -47,13 +47,19 @@ public class Bufflalo extends Sprite{
     private static int attSpd;
     private static float movSpd;
     private boolean bufflaloIsDead;
+
     public float stateTime;
+
     public Object currentState;
     private Array<Bullet> fireballs;
-    private playscreen screen;
     private Array<Enemy> enemies;
+<<<<<<< HEAD
     private int spawns;
     private float spawnTime;
+=======
+    private playscreen screen;
+
+>>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
 
     public Bufflalo(playscreen screen){
         this.screen = screen;
@@ -79,16 +85,23 @@ public class Bufflalo extends Sprite{
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
+        for(Enemy ram : enemies){
+            ram.update(dt);
+            if(ram.isDestroyed())
+                enemies.removeValue(ram, true);
+        }
         /*if(!isDead())
             die();*/
         for(Enemy enemy : enemies) {
             enemy.update(dt);
             if (enemy.isDestroyed()) {
                 enemies.removeValue(enemy, true);
+
             }
         }
 
         generateEnemy(dt);
+
     }
 
 
@@ -103,6 +116,15 @@ public class Bufflalo extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
+<<<<<<< HEAD
+=======
+        fdef.filter.categoryBits = MyGdxGame.BUFFALO_BIT;
+        fdef.filter.maskBits = MyGdxGame.RAM_BIT |
+                MyGdxGame.GROUND_BIT |
+                MyGdxGame.NOTHING_BIT;
+
+
+>>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
         health = 50;
         level = 1;
         experience = 0;
@@ -113,9 +135,12 @@ public class Bufflalo extends Sprite{
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
+<<<<<<< HEAD
 
     }
     public void onEnemyHit() {
+=======
+>>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
     }
 
     public static int getHealth() {
@@ -161,7 +186,7 @@ public class Bufflalo extends Sprite{
     public void setMovSpd() {
         movSpd ++;
     }
-    public void hit() {
+    public void die() {
 
         if (!isDead()) {
 
@@ -175,7 +200,7 @@ public class Bufflalo extends Sprite{
                 fixture.setFilterData(filter);
             }
 
-            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+            //b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         }
     }
     public boolean isDead(){

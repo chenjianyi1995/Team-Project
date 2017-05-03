@@ -58,7 +58,7 @@ public class playscreen implements Screen {
 
         gamecam = new OrthographicCamera();
 
-        gamePort = new FitViewport(MyGdxGame.v_width / MyGdxGame.PPM, MyGdxGame.v_hieght / MyGdxGame.PPM,gamecam);
+        gamePort = new FitViewport(MyGdxGame.v_hieght / MyGdxGame.PPM, MyGdxGame.v_width / MyGdxGame.PPM,gamecam);
         hud =  new Hud(game.batch);
 
 
@@ -177,7 +177,7 @@ public class playscreen implements Screen {
     }
 
     public boolean gameOver(){
-        if(player.currentState == Bufflalo.State.DEAD){
+        if(player.isDead()){
             return true;
         }
         return false;

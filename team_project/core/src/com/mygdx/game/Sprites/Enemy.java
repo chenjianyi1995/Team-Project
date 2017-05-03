@@ -23,8 +23,8 @@ public class Enemy extends Sprite{
     public Body b2body;
     private TextureRegion ramstand;
 
-    private boolean setToDestroyed;
-    boolean destroyed;
+    public boolean setToDestroyed;
+    public boolean destroyed;
 
     private static int health;
     private static int level;
@@ -59,11 +59,13 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
+            Hud.addscore(1);
 
         }
-        else if(!destroyed) {
+
+       else if(!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-            b2body.setLinearVelocity(velocity);
+            //b2body.setLinearVelocity(velocity);
         }
         setLevel(dt);
     }
@@ -93,7 +95,9 @@ public class Enemy extends Sprite{
 
     }
     public void hit() { setToDestroyed = true; }
-    public boolean isDestroyed() {return destroyed;}
+
+    public boolean isDestroyed() { return destroyed; }
+
     public static int getLevel() {
         return level;
     }
