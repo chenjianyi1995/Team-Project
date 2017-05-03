@@ -60,11 +60,11 @@ public class Bufflalo extends Sprite{
         spawns = 0;
 
         defineBuffalo();
-        buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 0, 12, 16);
+        buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 3, 12, 16);
         bufflaloDead= new TextureRegion(screen.getAtlas().findRegion("buffalo"), 72, 0, 12, 16);
 
 
-        setBounds(0,0,12/MyGdxGame.PPM,16/MyGdxGame.PPM);
+        setBounds(0,0,27/MyGdxGame.PPM,31/MyGdxGame.PPM);
         setRegion(buffstand);
         fireballs = new Array<Bullet>();
         enemies = new Array<Enemy>();
@@ -101,7 +101,7 @@ public class Bufflalo extends Sprite{
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5/ MyGdxGame.PPM);
+        shape.setRadius(10/ MyGdxGame.PPM);
 
         fdef.filter.categoryBits = MyGdxGame.BUFFALO_BIT;
         fdef.filter.maskBits = MyGdxGame.RAM_BIT |
@@ -135,7 +135,7 @@ public class Bufflalo extends Sprite{
         baseHealth = baseHealth + 100;
         health = baseHealth;
         damage = damage + 10;
-        movSpd += 0.3f;
+        movSpd += 0.5f;
         MyGdxGame.manager.get("audio/buffup.mp3", Sound.class).play();
     }
     public static int getExperience() {
@@ -167,7 +167,7 @@ public class Bufflalo extends Sprite{
 
         if (!isDead()) {
 
-            MyGdxGame.manager.get("audio/background.ogg",Music.class).stop();
+            MyGdxGame.manager.get("audio/background.mp3",Music.class).stop();
             MyGdxGame.manager.get("audio/gameover.wav", Sound.class).play();
             bufflaloIsDead = true;
             Filter filter = new Filter();

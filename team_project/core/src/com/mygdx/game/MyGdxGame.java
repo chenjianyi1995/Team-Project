@@ -32,7 +32,7 @@ public class MyGdxGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
-		manager.load("audio/background.ogg", Music.class);
+		manager.load("audio/background.mp3", Music.class);
 		manager.load("audio/score.wav", Sound.class);
 		manager.load("audio/fireball.wav", Sound.class);
 		manager.load("audio/gameover.wav", Sound.class);
