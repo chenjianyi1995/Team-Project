@@ -12,7 +12,6 @@ public class MyGdxGame extends Game {
 	public static final int v_hieght = 800;
 	public static final float PPM = 100;
 
-
 	//collisons
 	public static final short NOTHING_BIT = 0;
 	public static final short BUFFALO_BIT = 8;

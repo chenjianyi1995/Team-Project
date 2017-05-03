@@ -11,8 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Bufflalo;
 
 /**
@@ -22,12 +24,13 @@ import com.mygdx.game.Sprites.Bufflalo;
 public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
+    public static Integer score;
+    private MyGdxGame game;
 
-    private Game game;
+    public GameOverScreen(MyGdxGame game){
 
-    public GameOverScreen(Game game){
         this.game = game;
-        viewport = new FillViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
+        viewport = new FitViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
         stage = new Stage(viewport, ((MyGdxGame) game).batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
@@ -35,13 +38,19 @@ public class GameOverScreen implements Screen {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-
+        score = Hud.getScore();
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Click to play Again", font);
+        Label scoreLabel = new Label("Final Score :", font);
+        Label scoreNum = new Label(String.format("%d", score), font);
+        Label playAgainLabel = new Label("Click To Play Again", font);
 
-        table.add(gameOverLabel).expand();
+
+        table.add(gameOverLabel).expand().padTop(10);
         table.row();
-        table.add(playAgainLabel).expand().padTop(10f);
+        table.add(scoreLabel).expandX().pad(10,10,10,10);
+        table.add(scoreNum).expandX().padTop(10);
+        table.row();
+        table.add(playAgainLabel).expand().padTop(10);
 
 
         stage.addActor(table);

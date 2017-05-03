@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.DelaunayTriangulator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -41,17 +42,18 @@ public class Bufflalo extends Sprite{
     private static int attSpd;
     private static float movSpd;
     private boolean bufflaloIsDead;
-    private float stateTimer;
-    private float stateTime;
+
+    public float stateTime;
+
     public Object currentState;
     private Array<Bullet> fireballs;
     private Array<Enemy> enemies;
     private playscreen screen;
 
+
     public Bufflalo(playscreen screen){
         this.screen = screen;
         this.world = screen.getWorld();
-        stateTimer = 0;
 
         defineBuffalo();
         buffstand = new TextureRegion(screen.getAtlas().findRegion("buffalo"), 0, 0, 12, 16);
@@ -66,7 +68,6 @@ public class Bufflalo extends Sprite{
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
-        GenerateEnemy(dt);
         for(Bullet ball : fireballs){
             ball.update(dt);
             if(ball.isDestroyed())
@@ -79,6 +80,14 @@ public class Bufflalo extends Sprite{
         }
         /*if(!isDead())
             die();*/
+        for(Enemy enemy : enemies) {
+            enemy.update(dt);
+            if (enemy.isDestroyed()) {
+                enemies.removeValue(enemy, true);
+            }
+        }
+        generateEnemy(dt);
+
     }
 
 
@@ -110,6 +119,7 @@ public class Bufflalo extends Sprite{
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
+
     public static int getHealth() {
         return health;
     }
@@ -153,8 +163,7 @@ public class Bufflalo extends Sprite{
     public void setMovSpd() {
         movSpd ++;
     }
-
-    public void hit(Enemy enemy) {
+    public void die() {
 
         if (!isDead()) {
 
@@ -168,16 +177,11 @@ public class Bufflalo extends Sprite{
                 fixture.setFilterData(filter);
             }
 
-            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+            //b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         }
     }
-
     public boolean isDead(){
         return bufflaloIsDead;
-    }
-
-    public float getStateTimer(){
-        return stateTimer;
     }
     public void fire(char direction){
         Bullet bullet = new Bullet(this, screen, b2body.getPosition().x, b2body.getPosition().y, direction);
@@ -202,16 +206,19 @@ public class Bufflalo extends Sprite{
         }
 
     }
-    public void GenerateEnemy(float dt){
+    public void generateEnemy(float dt){
         stateTime += dt;
-        if(stateTime > 5){
-
+        if(stateTime >= 2){
+            Enemy enemy = new Enemy(screen, 1380/MyGdxGame.PPM, 1320/MyGdxGame.PPM);
+            enemies.add(enemy);
+            stateTime = 0;
         }
     }
     public void draw(Batch batch){
         super.draw(batch);
         for(Bullet ball : fireballs)
             ball.draw(batch);
-
+        for(Enemy enemy : enemies)
+            enemy.draw(batch);
     }
 }

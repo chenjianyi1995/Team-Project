@@ -47,9 +47,9 @@ public class Bullet extends Sprite {
 
     private void defineBullet() {
         BodyDef bdef = new BodyDef();
-        if(direction == 'w') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight() + this.getHeight()/2);
-        else if(direction == 'a') bdef.position.set(player.getX() - this.getWidth()*(3/2), player.getY() + player.getHeight()/2);
-        else if(direction == 's') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() + this.getHeight()/2);
+        if(direction == 'w') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight() + this.getHeight());
+        else if(direction == 'a') bdef.position.set(player.getX() - this.getWidth(), player.getY() + player.getHeight()/2);
+        else if(direction == 's') bdef.position.set(player.getX() + player.getWidth()/2, player.getY() - this.getHeight());
         else if(direction == 'd') bdef.position.set(player.getX() + player.getWidth() + this.getWidth(), player.getY() + player.getHeight()/2);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
@@ -64,8 +64,9 @@ public class Bullet extends Sprite {
                 MyGdxGame.OBJECT_BIT |
                 MyGdxGame.RAM_BIT;
         fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
 
+
+        b2body.createFixture(fdef).setUserData(this);
 
 
     }

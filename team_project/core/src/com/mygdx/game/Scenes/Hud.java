@@ -45,7 +45,7 @@ public class Hud implements Disposable{
         score = 0;
         level = 1;
 
-        viewport = new FitViewport(MyGdxGame.v_width, MyGdxGame.v_hieght, new OrthographicCamera());
+        viewport = new FitViewport(MyGdxGame.v_hieght, MyGdxGame.v_width, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         Table table = new Table();
@@ -84,9 +84,12 @@ public class Hud implements Disposable{
         scorelabel.setText(String.format("%d", score));
         MyGdxGame.manager.get("audio/score.wav", Sound.class).play();
     }
+
+    public static Integer getScore() { return score; }
     public static Integer getTotTime() {
         return worldTime;
     }
+
     @Override
     public void dispose() {
         stage.dispose();
