@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.compression.lzma.Encoder;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screen.playscreen;
@@ -53,13 +54,9 @@ public class Bufflalo extends Sprite{
     public Object currentState;
     private Array<Bullet> fireballs;
     private Array<Enemy> enemies;
-<<<<<<< HEAD
     private int spawns;
     private float spawnTime;
-=======
     private playscreen screen;
-
->>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
 
     public Bufflalo(playscreen screen){
         this.screen = screen;
@@ -84,11 +81,6 @@ public class Bufflalo extends Sprite{
             ball.update(dt);
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
-        }
-        for(Enemy ram : enemies){
-            ram.update(dt);
-            if(ram.isDestroyed())
-                enemies.removeValue(ram, true);
         }
         /*if(!isDead())
             die();*/
@@ -116,15 +108,11 @@ public class Bufflalo extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
-<<<<<<< HEAD
-=======
         fdef.filter.categoryBits = MyGdxGame.BUFFALO_BIT;
         fdef.filter.maskBits = MyGdxGame.RAM_BIT |
                 MyGdxGame.GROUND_BIT |
                 MyGdxGame.NOTHING_BIT;
 
-
->>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
         health = 50;
         level = 1;
         experience = 0;
@@ -135,12 +123,6 @@ public class Bufflalo extends Sprite{
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-<<<<<<< HEAD
-
-    }
-    public void onEnemyHit() {
-=======
->>>>>>> 500fdc002aa9d11dcc8df8ca6556b6217632b2be
     }
 
     public static int getHealth() {
@@ -155,18 +137,18 @@ public class Bufflalo extends Sprite{
     public static int getLevel() {
         return level;
     }
-    public void setLevel() {
-        if(experience >= xpToNext){
-            level ++;
-            xpToNext = xpToNext + 100;
-        }
-    }
     public static int getExperience() {
         return experience;
     }
+    public static int getXpToNext() {
+        return xpToNext;
+    }
     //may want to set xpGain to be variable to diff (from time calculation for enemy level
-    public void setExperience(int xpGain) {
+    public static void setExperience(int xpGain) {
         experience = experience + xpGain;
+    }
+    public static void setXpToNext(){
+        xpToNext = xpToNext + xpToNext * Enemy.getLevel();
     }
     public static int getDamage(){
         return damage;
@@ -186,6 +168,13 @@ public class Bufflalo extends Sprite{
     public void setMovSpd() {
         movSpd ++;
     }
+    public void hitEnemy(){
+        if(health == 0)
+            die();
+        else{
+            health = health - Enemy.getDamage();
+        }
+    }
     public void die() {
 
         if (!isDead()) {
@@ -199,8 +188,6 @@ public class Bufflalo extends Sprite{
             for (Fixture fixture : b2body.getFixtureList()) {
                 fixture.setFilterData(filter);
             }
-
-            //b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         }
     }
     public boolean isDead(){
@@ -241,16 +228,16 @@ public class Bufflalo extends Sprite{
 
         switch (spawns) {
             case 0:
-                spawnEnemy(1380, 1320, 3, dt);
+                spawnEnemy(1380, 1320, 2, dt);
                 break;
             case 1:
-                spawnEnemy(1800, 200, 3, dt);
+                spawnEnemy(1800, 200, 2, dt);
                 break;
             case 2:
-                spawnEnemy(400, 1200, 3, dt);
+                spawnEnemy(400, 1200, 2, dt);
                 break;
             case 3:
-                spawnEnemy(2400, 1000, 3, dt);
+                spawnEnemy(2400, 1000, 2, dt);
                 break;
 
         }

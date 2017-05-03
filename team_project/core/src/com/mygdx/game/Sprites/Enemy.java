@@ -30,6 +30,9 @@ public class Enemy extends Sprite{
     private static int level;
     private static int damage;
     private static int movSpd;
+
+    public float stateTime;
+
     Random rand = new Random();
     public Vector2 velocity;
     public Enemy(playscreen screen, float x, float y){
@@ -37,6 +40,7 @@ public class Enemy extends Sprite{
         this.screen = screen;
         this.world = screen.getWorld();
         //setPosition(x,y);
+        stateTime = 0;
 
         ramstand = new TextureRegion(screen.getAtlas().findRegion("RAM"), 0, 0, 14, 16);
         setRegion(ramstand);
@@ -59,13 +63,13 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            Hud.addscore(1);
-
+            Hud.addscore();
+            Bufflalo.setExperience(level * 10);
         }
 
        else if(!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-            //b2body.setLinearVelocity(velocity);
+            b2body.setLinearVelocity(velocity);
         }
         setLevel(dt);
     }
@@ -94,33 +98,38 @@ public class Enemy extends Sprite{
         b2body.createFixture(fdef).setUserData(this);
 
     }
-    public void hit() { setToDestroyed = true; }
+    public void hit() {
+        setHealth(0);
+        System.out.println(health);
+        if(health <= 0)
+            setToDestroyed = true;
+    }
 
     public boolean isDestroyed() { return destroyed; }
 
     public static int getLevel() {
         return level;
     }
-    public static int getHealth() {
-        return health;
-    }
     public static int getDamage() {
         return damage;
     }
     public void setLevel(float dt) {
         int diff = 0;
-        if(Hud.getTotTime() % 10 == 0) {
+        stateTime += dt;
+        int currentTime = (int) stateTime;
+        if(currentTime % 10 == 0) {
             diff = Hud.getTotTime() / 10;
+            stateTime = 0;
         }
         level = level + (level * (diff/10));
     }
-    public void setHealth() {
+    public void setHealth(int i) {
+        health = health - Bufflalo.getDamage();
+    }
+    public void setDamage(int i) {
 
     }
-    public void setDamage() {
-
-    }
-    public void setMovSpd() {
+    public void setMovSpd(int i) {
 
     }
 }

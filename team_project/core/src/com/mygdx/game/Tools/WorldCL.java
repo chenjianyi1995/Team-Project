@@ -27,9 +27,9 @@ public class WorldCL implements ContactListener {
 
             case MyGdxGame.BUFFALO_BIT | MyGdxGame.RAM_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
-                    ((Bufflalo)fixA.getUserData()).die();
+                    ((Bufflalo)fixA.getUserData()).hitEnemy();
                 else
-                    ((Bufflalo)fixB.getUserData()).die();
+                    ((Bufflalo)fixB.getUserData()).hitEnemy();
                 break;
 
             case MyGdxGame.FIREBALL_BIT | MyGdxGame.RAM_BIT:
