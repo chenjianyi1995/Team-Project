@@ -1,5 +1,6 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -23,13 +24,18 @@ public class Enemy extends Sprite{
     public Body b2body;
     private TextureRegion ramstand;
 
-    public boolean setToDestroyed;
+    public boolean toDestroy;
     public boolean destroyed;
+    public boolean killed;
 
     private static int health;
-    private static int level;
+    private static int baseHealth = 20;
+    private static int level = 1;
     private static int damage;
-    private static int movSpd;
+    private static int baseDamage = 5;
+    private static float movSpd;
+    private static float baseMovSpd = 1;
+    public boolean shot;
 
     public float stateTime;
 
@@ -41,6 +47,7 @@ public class Enemy extends Sprite{
         this.world = screen.getWorld();
         //setPosition(x,y);
         stateTime = 0;
+
 
         ramstand = new TextureRegion(screen.getAtlas().findRegion("RAM"), 0, 0, 14, 16);
         setRegion(ramstand);
@@ -60,18 +67,19 @@ public class Enemy extends Sprite{
         float vel_x = xma/length;
         float vel_y = ymb/length;
         velocity = new Vector2(-vel_x*movSpd, -vel_y*movSpd);
-        if(setToDestroyed && !destroyed){
+        if(toDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            Hud.addscore();
-            Bufflalo.setExperience(level * 10);
+            if(killed) {
+                Hud.addscore();
+                Bufflalo.setExperience(level * 10);
+            }
         }
 
        else if(!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             b2body.setLinearVelocity(velocity);
         }
-        setLevel(dt);
     }
     public void defineEnemy(float x, float y){
         BodyDef bdef = new BodyDef();
@@ -79,10 +87,9 @@ public class Enemy extends Sprite{
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        health = 20;
-        level = 1;
-        damage = 5;
-        movSpd = 1;
+        health = baseHealth;
+        damage = baseDamage;
+        movSpd = baseMovSpd;
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -97,12 +104,18 @@ public class Enemy extends Sprite{
 
         b2body.createFixture(fdef).setUserData(this);
 
+
+    }
+
+    public void setToDestroy(boolean kill){
+        killed = kill;
+        toDestroy = true;
     }
     public void hit() {
-        setHealth(0);
-        System.out.println(health);
+        setHealth(true);
+     //   System.out.println(health);
         if(health <= 0)
-            setToDestroyed = true;
+            setToDestroy(true);
     }
 
     public boolean isDestroyed() { return destroyed; }
@@ -113,23 +126,27 @@ public class Enemy extends Sprite{
     public static int getDamage() {
         return damage;
     }
-    public void setLevel(float dt) {
-        int diff = 0;
-        stateTime += dt;
-        int currentTime = (int) stateTime;
-        if(currentTime % 10 == 0) {
-            diff = Hud.getTotTime() / 10;
-            stateTime = 0;
-        }
+    public static void setLevel() {
+        int diff;
+        diff = Hud.getTotTime() / 10;
+        System.out.println(diff);
         level = level + (level * (diff/10));
+        setHealth(false);
+        setDamage();
+        setMovSpd();
     }
-    public void setHealth(int i) {
-        health = health - Bufflalo.getDamage();
+    public static void setHealth(boolean shot) {
+        if(shot) {
+            health = health - Bufflalo.getDamage();
+        }
+        else {
+            baseHealth = baseHealth + 1;
+        }
     }
-    public void setDamage(int i) {
-
+    public static void setDamage() {
+        baseDamage = baseDamage + 2;
     }
-    public void setMovSpd(int i) {
-
+    public static void setMovSpd() {
+        baseMovSpd += 0.15f * baseMovSpd;
     }
 }

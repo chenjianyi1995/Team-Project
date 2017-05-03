@@ -1,5 +1,6 @@
 package com.mygdx.game.Scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -66,7 +67,7 @@ public class Hud implements Disposable{
         currentTime = new Label(String.format("%d", worldTime), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levellabel = new Label("Level", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         currentLevel = new Label(String.format("%d", level), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        health = new Label(String.format("%d", Bufflalo.getHealth()), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        health = new Label(String.format("%d", Bufflalo.getHealth(false)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         xp = new Label(String.format("%d / %d", Bufflalo.getExperience(), Bufflalo.getXpToNext()), new Label.LabelStyle(new BitmapFont(), Color.BLUE));
         healthLabel = new Label("Health", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         xpLabel = new Label("XP", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -113,11 +114,14 @@ public class Hud implements Disposable{
         level = Bufflalo.getLevel();
         currentLevel.setText(String.format("%d", level));
         totalScore.setText(String.format("%d", score));
-        health.setText(String.format("%d", Bufflalo.getHealth()));
-        xp.setText(String.format("%d / %d", Bufflalo.getExperience(), Bufflalo.getXpToNext()));
-        if(Bufflalo.getHealth() < Bufflalo.getHealth()*0.4){
+        health.setText(String.format("%d", Bufflalo.getHealth(false)));
+        if(Bufflalo.getHealth(false) > (Bufflalo.getHealth(true)*0.5)){
+            health.setStyle(new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        }
+        else{
             health.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
         }
+        xp.setText(String.format("%d / %d", Bufflalo.getExperience(), Bufflalo.getXpToNext()));
     }
     public static void addscore(){
         score ++;

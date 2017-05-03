@@ -41,15 +41,16 @@ public class Bufflalo extends Sprite{
 
 
     private static int health;
+    private static int baseHealth = 50;
     private static int level;
     private static int experience;
     private static int xpToNext;
     private static int damage;
-    private static int attSpd;
     private static float movSpd;
     private boolean bufflaloIsDead;
 
     public float stateTime;
+    public float secondState;
 
     public Object currentState;
     private Array<Bullet> fireballs;
@@ -93,6 +94,8 @@ public class Bufflalo extends Sprite{
         }
 
         generateEnemy(dt);
+        if(experience >= xpToNext)
+            levelUP();
 
     }
 
@@ -113,29 +116,35 @@ public class Bufflalo extends Sprite{
                 MyGdxGame.GROUND_BIT |
                 MyGdxGame.NOTHING_BIT;
 
-        health = 50;
+        health = baseHealth;
         level = 1;
         experience = 0;
         xpToNext = 100;
         damage = 5;
-        attSpd = 1;
         movSpd = 1;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public static int getHealth() {
-        return health;
-    }
-    public void setHealth(int newHealth, boolean isDamage) {
-        if(isDamage) {
-            health = health - newHealth;
-        }
-        else health = health + newHealth;
+    public static int getHealth(boolean base) {
+        if(base)
+            return baseHealth;
+        else
+            return health;
     }
     public static int getLevel() {
         return level;
+    }
+    public void levelUP(){
+        experience = experience - xpToNext;
+        setXpToNext();
+        level ++;
+        baseHealth = baseHealth + 100;
+        health = baseHealth;
+        damage = damage + 10;
+        movSpd += 0.3f;
+        System.out.println(movSpd);
     }
     public static int getExperience() {
         return experience;
@@ -153,27 +162,13 @@ public class Bufflalo extends Sprite{
     public static int getDamage(){
         return damage;
     }
-    public void setDamage(){
-        damage = damage + damage;
-    }
-    public static int getAttSpd() {
-        return attSpd;
-    }
-    public void setAttSpd() {
-        attSpd ++;
-    }
     public static float getMovSpd() {
         return movSpd;
     }
-    public void setMovSpd() {
-        movSpd ++;
-    }
     public void hitEnemy(){
-        if(health == 0)
+        health = health - Enemy.getDamage();
+        if(health <= 0)
             die();
-        else{
-            health = health - Enemy.getDamage();
-        }
     }
     public void die() {
 
@@ -218,12 +213,18 @@ public class Bufflalo extends Sprite{
     }
     public void generateEnemy(float dt){
         stateTime += dt;
+        secondState += dt;
         int currentTime = (int) stateTime;
         if(currentTime == 2 && spawns <= 3){
             Random rand = new Random();
             int value = rand.nextInt(4);
             spawns = value;
             stateTime = 0;
+        }
+        int secondTime = (int) secondState;
+        if(secondTime == 15){
+            Enemy.setLevel();
+            secondState = 0;
         }
 
         switch (spawns) {

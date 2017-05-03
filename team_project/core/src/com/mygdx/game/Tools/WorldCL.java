@@ -26,10 +26,14 @@ public class WorldCL implements ContactListener {
         switch (cdef){
 
             case MyGdxGame.BUFFALO_BIT | MyGdxGame.RAM_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
-                    ((Bufflalo)fixA.getUserData()).hitEnemy();
-                else
-                    ((Bufflalo)fixB.getUserData()).hitEnemy();
+                if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT) {
+                    ((Bufflalo) fixA.getUserData()).hitEnemy();
+                    ((Enemy) fixB.getUserData()).setToDestroy(false);
+                }
+                else {
+                    ((Bufflalo) fixB.getUserData()).hitEnemy();
+                    ((Enemy) fixA.getUserData()).setToDestroy(false);
+                }
                 break;
 
             case MyGdxGame.FIREBALL_BIT | MyGdxGame.RAM_BIT:
