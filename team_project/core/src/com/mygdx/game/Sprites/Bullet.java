@@ -58,18 +58,15 @@ public class Bullet extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
-        fdef.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
+     /*   fdef.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
         fdef.filter.maskBits = MyGdxGame.BUFFALO_BIT |
                 MyGdxGame.GROUND_BIT |
                 MyGdxGame.OBJECT_BIT |
-                MyGdxGame.RAM_BIT;
+                MyGdxGame.RAM_BIT;*/
         fdef.shape = shape;
-<<<<<<< HEAD
-        b2body.createFixture(fdef).setUserData("bullet");
-=======
-        b2body.createFixture(fdef).setUserData(this);
->>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
 
+
+        b2body.createFixture(fdef).setUserData(this);
 
 
     }

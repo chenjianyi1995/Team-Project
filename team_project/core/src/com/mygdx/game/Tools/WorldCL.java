@@ -19,19 +19,18 @@ import com.mygdx.game.Sprites.Enemy;
 public class WorldCL implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
-<<<<<<< HEAD
-        //Gdx.app.log("Begin Contact", "");
-=======
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
+
+        if(fixA.getUserData() == "bullet" && fixB.getUserData() == "ram" || fixA.getUserData() == "bullet" && fixB.getUserData() == "ram"){
+
+        }
+
         int cdef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (cdef){
-
-<<<<<<< HEAD
-=======
             case MyGdxGame.BUFFALO_BIT | MyGdxGame.RAM_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
-                    ((Bufflalo) fixA.getUserData()).die();
+           /*     if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
+                   ((Bufflalo) fixA.getUserData()).die();
                 else
                     ((Bufflalo) fixB.getUserData()).die();
                 break;
@@ -47,7 +46,6 @@ public class WorldCL implements ContactListener {
                 }
                 break;
             */
->>>>>>> 28fb7f16b3e2bdf342c2fcf1a842c6926f6170c1
             case MyGdxGame.FIREBALL_BIT | MyGdxGame.RAM_BIT:
 
                 if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
@@ -66,7 +64,6 @@ public class WorldCL implements ContactListener {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
         }
->>>>>>> e57c1cef7d1fb06cf1eeb6cb98bbf7cc8dcab10a
     }
 
     @Override

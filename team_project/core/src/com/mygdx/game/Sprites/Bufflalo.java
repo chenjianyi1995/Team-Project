@@ -94,7 +94,7 @@ public class Bufflalo extends Sprite{
         movSpd = 1;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData("buffBody");
+        b2body.createFixture(fdef).setUserData(this);
 
      /*   EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2/MyGdxGame.PPM, 5/MyGdxGame.PPM),new Vector2(2/MyGdxGame.PPM, 5/MyGdxGame.PPM) );
