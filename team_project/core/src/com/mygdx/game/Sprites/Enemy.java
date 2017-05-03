@@ -145,6 +145,6 @@ public class Enemy extends Sprite{
         baseDamage = baseDamage + 2;
     }
     public static void setMovSpd() {
-        baseMovSpd += 0.15f * baseMovSpd;
+        baseMovSpd += 0.1f * baseMovSpd;
     }
 }
