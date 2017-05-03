@@ -42,8 +42,10 @@ public class Bufflalo extends Sprite{
     private static float movSpd;
     private boolean bufflaloIsDead;
     private float stateTimer;
+    private float stateTime;
     public Object currentState;
     private Array<Bullet> fireballs;
+    private Array<Enemy> enemies;
     private playscreen screen;
 
     public Bufflalo(playscreen screen){
@@ -59,14 +61,21 @@ public class Bufflalo extends Sprite{
         setBounds(0,0,12/MyGdxGame.PPM,16/MyGdxGame.PPM);
         setRegion(buffstand);
         fireballs = new Array<Bullet>();
+        enemies = new Array<Enemy>();
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+        GenerateEnemy(dt);
         for(Bullet ball : fireballs){
             ball.update(dt);
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
+        }
+        for(Enemy ram : enemies){
+            ram.update(dt);
+            if(ram.isDestroyed())
+                enemies.removeValue(ram, true);
         }
         /*if(!isDead())
             die();*/
@@ -84,6 +93,11 @@ public class Bufflalo extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(5/ MyGdxGame.PPM);
 
+        fdef.filter.categoryBits = MyGdxGame.BUFFALO_BIT;
+        fdef.filter.maskBits = MyGdxGame.RAM_BIT |
+                MyGdxGame.GROUND_BIT |
+                MyGdxGame.NOTHING_BIT;
+
 
         health = 50;
         level = 1;
@@ -94,14 +108,7 @@ public class Bufflalo extends Sprite{
         movSpd = 1;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
-
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2/MyGdxGame.PPM, 5/MyGdxGame.PPM),new Vector2(2/MyGdxGame.PPM, 5/MyGdxGame.PPM) );
-        fdef.shape = head;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef).setUserData("head");
+        b2body.createFixture(fdef).setUserData(this);
     }
     public static int getHealth() {
         return health;
@@ -147,12 +154,7 @@ public class Bufflalo extends Sprite{
         movSpd ++;
     }
 
-    public State getState() {
-        if (bufflaloIsDead)
-            return State.DEAD;
-        return null;
-    }
-    public void hit(Enemy userData) {
+    public void hit(Enemy enemy) {
 
         if (!isDead()) {
 
@@ -200,9 +202,16 @@ public class Bufflalo extends Sprite{
         }
 
     }
+    public void GenerateEnemy(float dt){
+        stateTime += dt;
+        if(stateTime > 5){
+
+        }
+    }
     public void draw(Batch batch){
         super.draw(batch);
         for(Bullet ball : fireballs)
             ball.draw(batch);
+
     }
 }

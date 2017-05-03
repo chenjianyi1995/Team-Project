@@ -24,8 +24,8 @@ public class Enemy extends Sprite{
     public Body b2body;
     private TextureRegion ramstand;
 
-    private boolean setToDestroyed;
-    private boolean destroyed;
+    public boolean setToDestroyed;
+    public boolean destroyed;
 
     private static int health;
     private static int level;
@@ -70,15 +70,13 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            Filter filter = new Filter();
-            filter.maskBits = MyGdxGame.NOTHING_BIT;
-            for (Fixture fixture : b2body.getFixtureList())
-                fixture.setFilterData(filter);
+
         }
-        else if(!destroyed)
-            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
+       else if(!destroyed) {
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+            b2body.setLinearVelocity(velocity);
+        }
         setLevel(dt);
-        //b2body.setLinearVelocity(velocity);
     }
     public void defineEnemy(){
         BodyDef bdef = new BodyDef();
@@ -104,6 +102,7 @@ public class Enemy extends Sprite{
         b2body.createFixture(fdef).setUserData(this);
     }
     public void hit() { setToDestroyed = true; }
+    public boolean isDestroyed() { return destroyed; }
     public static int getLevel() {
         return level;
     }

@@ -22,14 +22,14 @@ public class WorldCL implements ContactListener {
         Fixture fixB = contact.getFixtureB();
         int cdef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (cdef){
-
+/*
             case MyGdxGame.BUFFALO_BIT | MyGdxGame.RAM_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.BUFFALO_BIT)
                     ((Bufflalo) fixA.getUserData()).die();
                 else
                     ((Bufflalo) fixB.getUserData()).die();
                 break;
-
+*/
             /*
             case MyGdxGame.RAM_BIT | MyGdxGame.FIREBALL_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.RAM_BIT){
