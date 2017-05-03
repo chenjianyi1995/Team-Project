@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Bufflalo;
@@ -32,7 +33,7 @@ public class Hud implements Disposable{
 
 
 
-    private static Label scorelabel;
+    private Label scorelabel;
     private Label timelabel;
     private Label levellabel;
     private Label currentTime;
@@ -78,10 +79,10 @@ public class Hud implements Disposable{
         }
         level = Bufflalo.getLevel();
         currentLevel.setText(String.format("%d", level));
+        totalScore.setText(String.format("%d", score));
     }
-    public static void addscrore(int value){
+    public static void addscore(int value){
         score += value;
-        scorelabel.setText(String.format("%d", score));
         MyGdxGame.manager.get("audio/score.wav", Sound.class).play();
     }
     public static Integer getTotTime() {

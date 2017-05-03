@@ -76,6 +76,7 @@ public class Bufflalo extends Sprite{
             enemy.update(dt);
             if (enemy.isDestroyed()) {
                 enemies.removeValue(enemy, true);
+
             }
         }
         generateEnemy(dt);

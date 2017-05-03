@@ -80,6 +80,7 @@ public class Enemy extends Sprite{
         if(setToDestroyed && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
+            Hud.addscore(1);
 
         }
         else if(!destroyed) {
