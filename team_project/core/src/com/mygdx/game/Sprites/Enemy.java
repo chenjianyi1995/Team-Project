@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
@@ -20,6 +21,7 @@ public class Enemy extends Sprite{
     protected playscreen screen;
     public Body b2body;
     private TextureRegion ramstand;
+
 
     private static int health;
     private static int level;
@@ -62,7 +64,7 @@ public class Enemy extends Sprite{
         shape.setRadius(10 / MyGdxGame.PPM);
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("ram");
     }
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight()/2);
@@ -87,6 +89,9 @@ public class Enemy extends Sprite{
             diff = Hud.getTotTime() / 10;
         }
         level = level + (level * (diff/10));
+    }
+    public void onBulletHit(){
+
     }
     public void setHealth() {
 

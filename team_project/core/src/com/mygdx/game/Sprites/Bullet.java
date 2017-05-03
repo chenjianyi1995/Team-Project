@@ -59,7 +59,7 @@ public class Bullet extends Sprite {
         shape.setRadius(10/ MyGdxGame.PPM);
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("bullet");
 
 
 

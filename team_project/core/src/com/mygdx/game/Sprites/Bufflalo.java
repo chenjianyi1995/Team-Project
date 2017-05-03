@@ -81,15 +81,19 @@ public class Bufflalo extends Sprite{
         movSpd = 1;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("buffBody");
 
-        EdgeShape head = new EdgeShape();
+     /*   EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2/MyGdxGame.PPM, 5/MyGdxGame.PPM),new Vector2(2/MyGdxGame.PPM, 5/MyGdxGame.PPM) );
         fdef.shape = head;
         fdef.isSensor = true;
 
-        b2body.createFixture(fdef).setUserData("head");
+        b2body.createFixture(fdef).setUserData("head"); */
     }
+    public void onEnemyHit() {
+
+    }
+
     public static int getHealth() {
         return health;
     }
