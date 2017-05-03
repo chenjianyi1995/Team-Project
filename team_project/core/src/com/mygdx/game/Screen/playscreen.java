@@ -73,9 +73,9 @@ public class playscreen implements Screen {
         new B2d(this);
         player = new Bufflalo(this);
         world.setContactListener(new WorldCL());
-        //music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
-        //music.setLooping(true);
-        //music.play();
+        music = MyGdxGame.manager.get("audio/background.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
     }
 
     public  TextureAtlas getAtlas(){

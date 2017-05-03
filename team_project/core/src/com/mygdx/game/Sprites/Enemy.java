@@ -1,6 +1,6 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -42,10 +42,8 @@ public class Enemy extends Sprite{
     Random rand = new Random();
     public Vector2 velocity;
     public Enemy(playscreen screen, float x, float y){
-       // super(screen.getAtlas().findRegion("RAM"));
         this.screen = screen;
         this.world = screen.getWorld();
-        //setPosition(x,y);
         stateTime = 0;
 
 
@@ -72,7 +70,7 @@ public class Enemy extends Sprite{
             destroyed = true;
             if(killed) {
                 Hud.addscore();
-                Bufflalo.setExperience(level * 10);
+                Bufflalo.setExperience(level * 15);
             }
         }
 
@@ -113,7 +111,6 @@ public class Enemy extends Sprite{
     }
     public void hit() {
         setHealth(true);
-     //   System.out.println(health);
         if(health <= 0)
             setToDestroy(true);
     }
@@ -134,6 +131,7 @@ public class Enemy extends Sprite{
         setHealth(false);
         setDamage();
         setMovSpd();
+        MyGdxGame.manager.get("audio/ramup.mp3", Sound.class).play();
     }
     public static void setHealth(boolean shot) {
         if(shot) {

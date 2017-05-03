@@ -1,26 +1,20 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.DelaunayTriangulator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.compression.lzma.Encoder;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screen.playscreen;
 
 import java.util.Random;
@@ -83,8 +77,6 @@ public class Bufflalo extends Sprite{
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
-        /*if(!isDead())
-            die();*/
         for(Enemy enemy : enemies) {
             enemy.update(dt);
             if (enemy.isDestroyed()) {
@@ -144,7 +136,7 @@ public class Bufflalo extends Sprite{
         health = baseHealth;
         damage = damage + 10;
         movSpd += 0.3f;
-        System.out.println(movSpd);
+        MyGdxGame.manager.get("audio/buffup.mp3", Sound.class).play();
     }
     public static int getExperience() {
         return experience;
@@ -167,6 +159,7 @@ public class Bufflalo extends Sprite{
     }
     public void hitEnemy(){
         health = health - Enemy.getDamage();
+        MyGdxGame.manager.get("audio/pain.mp3", Sound.class).play();
         if(health <= 0)
             die();
     }

@@ -36,6 +36,9 @@ public class MyGdxGame extends Game {
 		manager.load("audio/score.wav", Sound.class);
 		manager.load("audio/fireball.wav", Sound.class);
 		manager.load("audio/gameover.wav", Sound.class);
+		manager.load("audio/pain.mp3", Sound.class);
+        manager.load("audio/buffup.mp3", Sound.class);
+        manager.load("audio/ramup.mp3", Sound.class);
 		manager.finishLoading();
 		setScreen(new playscreen(this));
 	}
