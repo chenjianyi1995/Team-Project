@@ -109,7 +109,7 @@ public class Hud implements Disposable{
         currentLevel.setText(String.format("%d", level));
         totalScore.setText(String.format("%d", score));
         health.setText(String.format("%d", Bufflalo.getHealth(false)));
-        if(Bufflalo.getHealth(false) > (Bufflalo.getHealth(true)*0.5)){
+        if(Bufflalo.getHealth(false) > (Bufflalo.getHealth(true)*0.25)){
             health.setStyle(new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         }
         else{

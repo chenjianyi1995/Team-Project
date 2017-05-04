@@ -103,8 +103,8 @@ public class playscreen implements Screen {
                 player.b2body.applyLinearImpulse(new Vector2(0, -0.1f * player.getMovSpd()), player.b2body.getWorldCenter(), true);
             }
 
-
-            //speed up
+/*
+            //speed up ** FOR TESTING **
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 5) {
                 player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
             }
@@ -117,6 +117,7 @@ public class playscreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().y >= -5) {
                 player.b2body.applyLinearImpulse(new Vector2(0, -2f), player.b2body.getWorldCenter(), true);
             }
+            */
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.b2body.setLinearVelocity(0, 0);
                 player.b2body.setAngularVelocity(0);

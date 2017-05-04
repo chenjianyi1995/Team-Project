@@ -138,7 +138,7 @@ public class Enemy extends Sprite{
             health = health - Bufflalo.getDamage();
         }
         else {
-            baseHealth = baseHealth + 1;
+            baseHealth = baseHealth + 10;
         }
     }
     public static void setDamage() {
