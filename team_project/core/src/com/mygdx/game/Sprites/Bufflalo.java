@@ -21,9 +21,10 @@ import java.util.Random;
 
 
 /**
- * Created by ALwyn on 2017/3/12.
+ * Define buffalo parameters, collision.
+ * Track buffalo states.
+ * Also, enemy spawning is defined here.
  */
-
 public class Bufflalo extends Sprite{
     public enum State {DEAD};
 

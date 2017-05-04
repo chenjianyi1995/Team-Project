@@ -13,7 +13,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screen.playscreen;
 
 /**
- * Created by Jianyi on 3/29/2017.
+ * Define map objects collision, shapes.
  */
 
 public class B2d {

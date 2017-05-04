@@ -12,7 +12,8 @@ import com.mygdx.game.Screen.playscreen;
 
 
 /**
- * Created by zijunxu on 4/3/17.
+ * Define fireball parameters, collision.
+ * Set positions at where the fireball is shot.
  */
 
 

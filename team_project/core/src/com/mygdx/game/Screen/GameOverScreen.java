@@ -15,7 +15,9 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 
 /**
- * Created by Healer on 2017/4/23.
+ * When buffalo is dead, show game over screen.
+ * Show the player's final score.
+ * The ability to quickly restart the game by clicking on the screen.
  */
 
 public class GameOverScreen implements Screen {

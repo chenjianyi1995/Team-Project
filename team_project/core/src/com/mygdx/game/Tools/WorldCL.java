@@ -11,7 +11,7 @@ import com.mygdx.game.Sprites.Bullet;
 import com.mygdx.game.Sprites.Enemy;
 
 /**
- * Created by Jianyi on 4/2/2017.
+ * Detects sprites and/or objects' collision.
  */
 
 public class WorldCL implements ContactListener {

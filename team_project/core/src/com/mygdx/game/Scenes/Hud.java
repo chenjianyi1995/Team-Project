@@ -16,7 +16,8 @@ import com.mygdx.game.Sprites.Bufflalo;
 
 
 /**
- * Created by Jianyi on 2/26/2017.
+ * Create user hud, user states will be shown.
+ * Including health, level, time, and experience.
  */
 
 public class Hud implements Disposable{

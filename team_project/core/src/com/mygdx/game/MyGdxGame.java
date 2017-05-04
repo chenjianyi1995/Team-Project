@@ -9,6 +9,10 @@ import com.mygdx.game.Screen.playscreen;
 
 import java.awt.Toolkit;
 
+/**
+ * Set up AssetManager, which is used to load sound effects/background music.
+ * Define collision parameters.
+ */
 public class MyGdxGame extends Game {
 	public static final int v_width = Toolkit.getDefaultToolkit().getScreenSize().width;
 	public static final int v_hieght = Toolkit.getDefaultToolkit().getScreenSize().height;
