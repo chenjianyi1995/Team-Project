@@ -1,4 +1,12 @@
-# Look at http://www.lousymedia.com/csci-3308/assignments/team-project
+How to run/test the code:
+1) Clone and import the project into android studio
+2) Go to Run/Debug Configurations in android studio
+3) Add new configuration
+4) Set main class to: com.mygdx.game.desktop.DesktopLauncher
+   working directory: team_project/android/assets
+   use classpath of module: desktop
+5) Run
+
 # Team-Project
 1. Names/git id: Jianyi Chen 	/ chenjianyi1995;
 		 Jonathan Young / JonYoung1123;

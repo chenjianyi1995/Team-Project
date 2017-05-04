@@ -26,7 +26,8 @@ import com.mygdx.game.Tools.WorldCL;
 
 
 /**
- * Created by Jianyi on 2/26/2017.
+ * Handle user input.
+ * Set user camera view.
  */
 
 public class playscreen implements Screen {

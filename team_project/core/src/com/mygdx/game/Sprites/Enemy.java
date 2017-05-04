@@ -15,7 +15,7 @@ import com.mygdx.game.Scenes.Hud;
 
 import java.util.Random;
 /**
- * Created by JonYoung on 3/5/17.
+ * Define ram's parameters and collision.
  */
 
 public class Enemy extends Sprite{
